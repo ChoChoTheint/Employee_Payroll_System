@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(calculateSalary));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.noofsale = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.good = new System.Windows.Forms.RadioButton();
             this.excellence = new System.Windows.Forms.RadioButton();
             this.normal = new System.Windows.Forms.RadioButton();
@@ -75,8 +77,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label9 = new System.Windows.Forms.Label();
-            this.noofsale = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.empCalculatedg)).BeginInit();
             this.panel2.SuspendLayout();
@@ -123,15 +123,33 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(485, 24);
+            this.panel1.Location = new System.Drawing.Point(443, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1190, 463);
+            this.panel1.Size = new System.Drawing.Size(1232, 509);
             this.panel1.TabIndex = 6;
+            // 
+            // noofsale
+            // 
+            this.noofsale.Location = new System.Drawing.Point(1042, 166);
+            this.noofsale.Multiline = true;
+            this.noofsale.Name = "noofsale";
+            this.noofsale.Size = new System.Drawing.Size(161, 35);
+            this.noofsale.TabIndex = 27;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(874, 166);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(137, 29);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "No Of Sale ";
             // 
             // good
             // 
             this.good.AutoSize = true;
-            this.good.Location = new System.Drawing.Point(1031, 140);
+            this.good.Location = new System.Drawing.Point(1057, 113);
             this.good.Name = "good";
             this.good.Size = new System.Drawing.Size(64, 21);
             this.good.TabIndex = 25;
@@ -142,7 +160,7 @@
             // excellence
             // 
             this.excellence.AutoSize = true;
-            this.excellence.Location = new System.Drawing.Point(1031, 167);
+            this.excellence.Location = new System.Drawing.Point(1127, 113);
             this.excellence.Name = "excellence";
             this.excellence.Size = new System.Drawing.Size(96, 21);
             this.excellence.TabIndex = 24;
@@ -154,7 +172,7 @@
             // 
             this.normal.AutoSize = true;
             this.normal.Checked = true;
-            this.normal.Location = new System.Drawing.Point(1031, 113);
+            this.normal.Location = new System.Drawing.Point(977, 110);
             this.normal.Name = "normal";
             this.normal.Size = new System.Drawing.Size(74, 21);
             this.normal.TabIndex = 23;
@@ -166,7 +184,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(928, 105);
+            this.label8.Location = new System.Drawing.Point(874, 105);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(97, 29);
             this.label8.TabIndex = 22;
@@ -176,7 +194,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(501, 374);
+            this.label7.Location = new System.Drawing.Point(874, 223);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(162, 29);
             this.label7.TabIndex = 21;
@@ -186,7 +204,7 @@
             // 
             this.empjoindate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.empjoindate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.empjoindate.Location = new System.Drawing.Point(280, 324);
+            this.empjoindate.Location = new System.Drawing.Point(212, 324);
             this.empjoindate.Name = "empjoindate";
             this.empjoindate.Size = new System.Drawing.Size(161, 34);
             this.empjoindate.TabIndex = 20;
@@ -195,14 +213,14 @@
             // 
             this.paymentdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paymentdate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.paymentdate.Location = new System.Drawing.Point(761, 374);
+            this.paymentdate.Location = new System.Drawing.Point(1042, 223);
             this.paymentdate.Name = "paymentdate";
             this.paymentdate.Size = new System.Drawing.Size(161, 34);
             this.paymentdate.TabIndex = 19;
             // 
             // lateday
             // 
-            this.lateday.Location = new System.Drawing.Point(761, 166);
+            this.lateday.Location = new System.Drawing.Point(677, 166);
             this.lateday.Multiline = true;
             this.lateday.Name = "lateday";
             this.lateday.Size = new System.Drawing.Size(161, 35);
@@ -212,7 +230,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(501, 323);
+            this.label15.Location = new System.Drawing.Point(417, 323);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(254, 29);
             this.label15.TabIndex = 17;
@@ -220,7 +238,7 @@
             // 
             // empname
             // 
-            this.empname.Location = new System.Drawing.Point(280, 160);
+            this.empname.Location = new System.Drawing.Point(212, 160);
             this.empname.Multiline = true;
             this.empname.Name = "empname";
             this.empname.Size = new System.Drawing.Size(161, 35);
@@ -230,7 +248,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(101, 166);
+            this.label16.Location = new System.Drawing.Point(33, 166);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(78, 29);
             this.label16.TabIndex = 15;
@@ -240,7 +258,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(501, 217);
+            this.label14.Location = new System.Drawing.Point(417, 217);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(125, 29);
             this.label14.TabIndex = 13;
@@ -248,7 +266,7 @@
             // 
             // tranallowance
             // 
-            this.tranallowance.Location = new System.Drawing.Point(761, 323);
+            this.tranallowance.Location = new System.Drawing.Point(677, 323);
             this.tranallowance.Multiline = true;
             this.tranallowance.Name = "tranallowance";
             this.tranallowance.Size = new System.Drawing.Size(161, 35);
@@ -256,7 +274,7 @@
             // 
             // leaveday
             // 
-            this.leaveday.Location = new System.Drawing.Point(761, 217);
+            this.leaveday.Location = new System.Drawing.Point(677, 217);
             this.leaveday.Multiline = true;
             this.leaveday.Name = "leaveday";
             this.leaveday.Size = new System.Drawing.Size(161, 35);
@@ -264,7 +282,7 @@
             // 
             // empbankacc
             // 
-            this.empbankacc.Location = new System.Drawing.Point(280, 266);
+            this.empbankacc.Location = new System.Drawing.Point(212, 266);
             this.empbankacc.Multiline = true;
             this.empbankacc.Name = "empbankacc";
             this.empbankacc.Size = new System.Drawing.Size(161, 35);
@@ -274,7 +292,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(101, 323);
+            this.label13.Location = new System.Drawing.Point(33, 323);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(114, 29);
             this.label13.TabIndex = 10;
@@ -282,7 +300,7 @@
             // 
             // attendance
             // 
-            this.attendance.Location = new System.Drawing.Point(761, 105);
+            this.attendance.Location = new System.Drawing.Point(677, 105);
             this.attendance.Multiline = true;
             this.attendance.Name = "attendance";
             this.attendance.Size = new System.Drawing.Size(161, 35);
@@ -292,7 +310,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(101, 272);
+            this.label12.Location = new System.Drawing.Point(33, 272);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(158, 29);
             this.label12.TabIndex = 9;
@@ -302,7 +320,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(501, 272);
+            this.label4.Location = new System.Drawing.Point(417, 272);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(170, 29);
             this.label4.TabIndex = 10;
@@ -312,7 +330,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(501, 105);
+            this.label5.Location = new System.Drawing.Point(417, 105);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(133, 29);
             this.label5.TabIndex = 9;
@@ -321,7 +339,7 @@
             // empid
             // 
             this.empid.FormattingEnabled = true;
-            this.empid.Location = new System.Drawing.Point(280, 105);
+            this.empid.Location = new System.Drawing.Point(212, 105);
             this.empid.Name = "empid";
             this.empid.Size = new System.Drawing.Size(161, 24);
             this.empid.TabIndex = 8;
@@ -341,9 +359,9 @@
             // 
             this.clearBtn.BackColor = System.Drawing.Color.Crimson;
             this.clearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearBtn.Location = new System.Drawing.Point(262, 403);
+            this.clearBtn.Location = new System.Drawing.Point(652, 416);
             this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(153, 47);
+            this.clearBtn.Size = new System.Drawing.Size(186, 49);
             this.clearBtn.TabIndex = 6;
             this.clearBtn.Text = "Clear";
             this.clearBtn.UseVisualStyleBackColor = false;
@@ -353,9 +371,9 @@
             // 
             this.btncalculate.BackColor = System.Drawing.Color.SteelBlue;
             this.btncalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncalculate.Location = new System.Drawing.Point(98, 403);
+            this.btncalculate.Location = new System.Drawing.Point(401, 418);
             this.btncalculate.Name = "btncalculate";
-            this.btncalculate.Size = new System.Drawing.Size(148, 47);
+            this.btncalculate.Size = new System.Drawing.Size(186, 47);
             this.btncalculate.TabIndex = 6;
             this.btncalculate.Text = "Calculate";
             this.btncalculate.UseVisualStyleBackColor = false;
@@ -363,7 +381,7 @@
             // 
             // mealallowance
             // 
-            this.mealallowance.Location = new System.Drawing.Point(761, 272);
+            this.mealallowance.Location = new System.Drawing.Point(677, 272);
             this.mealallowance.Multiline = true;
             this.mealallowance.Name = "mealallowance";
             this.mealallowance.Size = new System.Drawing.Size(161, 35);
@@ -371,7 +389,7 @@
             // 
             // empsalary
             // 
-            this.empsalary.Location = new System.Drawing.Point(280, 217);
+            this.empsalary.Location = new System.Drawing.Point(212, 217);
             this.empsalary.Multiline = true;
             this.empsalary.Name = "empsalary";
             this.empsalary.Size = new System.Drawing.Size(161, 35);
@@ -381,7 +399,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(101, 105);
+            this.label6.Location = new System.Drawing.Point(33, 105);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(167, 29);
             this.label6.TabIndex = 4;
@@ -391,7 +409,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(501, 166);
+            this.label3.Location = new System.Drawing.Point(417, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 29);
             this.label3.TabIndex = 2;
@@ -401,7 +419,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(101, 217);
+            this.label2.Location = new System.Drawing.Point(33, 217);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(145, 29);
             this.label2.TabIndex = 1;
@@ -410,10 +428,10 @@
             // empCalculatedg
             // 
             this.empCalculatedg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.empCalculatedg.Location = new System.Drawing.Point(485, 516);
+            this.empCalculatedg.Location = new System.Drawing.Point(443, 516);
             this.empCalculatedg.Name = "empCalculatedg";
             this.empCalculatedg.RowTemplate.Height = 24;
-            this.empCalculatedg.Size = new System.Drawing.Size(1213, 283);
+            this.empCalculatedg.Size = new System.Drawing.Size(1232, 283);
             this.empCalculatedg.TabIndex = 7;
             this.empCalculatedg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empCalculatedg_CellContentClick);
             // 
@@ -578,24 +596,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(928, 217);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(137, 29);
-            this.label9.TabIndex = 26;
-            this.label9.Text = "No Of Sale ";
-            // 
-            // noofsale
-            // 
-            this.noofsale.Location = new System.Drawing.Point(934, 249);
-            this.noofsale.Multiline = true;
-            this.noofsale.Name = "noofsale";
-            this.noofsale.Size = new System.Drawing.Size(161, 35);
-            this.noofsale.TabIndex = 27;
             // 
             // calculateSalary
             // 
