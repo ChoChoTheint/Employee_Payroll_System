@@ -37,7 +37,6 @@
             this.btnupdate = new System.Windows.Forms.Button();
             this.btnnew = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
-            this.txtbasicsalary = new System.Windows.Forms.TextBox();
             this.txtposition = new System.Windows.Forms.TextBox();
             this.txtdept = new System.Windows.Forms.TextBox();
             this.txtid = new System.Windows.Forms.TextBox();
@@ -60,6 +59,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtbasicsalary = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -75,13 +75,13 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.ForestGreen;
+            this.panel1.Controls.Add(this.txtbasicsalary);
             this.panel1.Controls.Add(this.btnclear);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btndelete);
             this.panel1.Controls.Add(this.btnupdate);
             this.panel1.Controls.Add(this.btnnew);
             this.panel1.Controls.Add(this.btnsave);
-            this.panel1.Controls.Add(this.txtbasicsalary);
             this.panel1.Controls.Add(this.txtposition);
             this.panel1.Controls.Add(this.txtdept);
             this.panel1.Controls.Add(this.txtid);
@@ -163,15 +163,6 @@
             this.btnsave.Text = "Save";
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
-            // 
-            // txtbasicsalary
-            // 
-            this.txtbasicsalary.Location = new System.Drawing.Point(341, 291);
-            this.txtbasicsalary.Multiline = true;
-            this.txtbasicsalary.Name = "txtbasicsalary";
-            this.txtbasicsalary.Size = new System.Drawing.Size(161, 35);
-            this.txtbasicsalary.TabIndex = 5;
-            this.txtbasicsalary.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbasicsalary_KeyDown);
             // 
             // txtposition
             // 
@@ -411,6 +402,14 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // txtbasicsalary
+            // 
+            this.txtbasicsalary.Location = new System.Drawing.Point(342, 297);
+            this.txtbasicsalary.Name = "txtbasicsalary";
+            this.txtbasicsalary.Size = new System.Drawing.Size(161, 22);
+            this.txtbasicsalary.TabIndex = 10;
+            this.txtbasicsalary.TextChanged += new System.EventHandler(this.txtbasicsalary_TextChanged);
+            // 
             // addPosition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -444,7 +443,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btndelete;
         private System.Windows.Forms.Button btnsave;
-        private System.Windows.Forms.TextBox txtbasicsalary;
         private System.Windows.Forms.TextBox txtposition;
         private System.Windows.Forms.TextBox txtdept;
         private System.Windows.Forms.TextBox txtid;
@@ -471,5 +469,6 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox txtbasicsalary;
     }
 }

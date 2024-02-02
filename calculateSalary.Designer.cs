@@ -433,7 +433,7 @@
             this.empCalculatedg.RowTemplate.Height = 24;
             this.empCalculatedg.Size = new System.Drawing.Size(1232, 283);
             this.empCalculatedg.TabIndex = 7;
-            this.empCalculatedg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empCalculatedg_CellContentClick);
+       //     this.empCalculatedg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empCalculatedg_CellContentClick);
             // 
             // panel2
             // 

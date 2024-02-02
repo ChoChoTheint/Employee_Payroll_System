@@ -81,23 +81,76 @@ namespace EmployeePayrollManagementSystem
 
         private void FillData()
         {
-           
                 SqlDataAdapter daEmp = new SqlDataAdapter("Select * From tblEmployee", consql);
                 DataSet dsEmp = new DataSet();
                 DataTable dt;
-
+            
                 daEmp.Fill(dsEmp, "Employee");
                 dt = dsEmp.Tables["Employee"];
                 empid.DataSource = dt;
                 empid.DisplayMember = dt.Columns["EmpID"].ToString();
-            
-            
+
+                string query = "Select * From tblEmployee";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, consql);
+                Dset = new DataSet();
+                adapter.Fill(Dset);
+                empCalculatedg.DataSource = Dset.Tables[0];
+
+                empCalculatedg.Columns[0].HeaderText = "ID";
+                empCalculatedg.Columns[1].HeaderText = "PositioinID";
+                empCalculatedg.Columns[2].HeaderText = "Name";
+                empCalculatedg.Columns[3].HeaderText = "Email";
+                empCalculatedg.Columns[4].HeaderText = "Address";
+                empCalculatedg.Columns[5].HeaderText = "Phone";
+                empCalculatedg.Columns[6].HeaderText = "NRC";
+                empCalculatedg.Columns[7].HeaderText = "DOB";
+                empCalculatedg.Columns[8].HeaderText = "Gender";
+                empCalculatedg.Columns[9].HeaderText = "Join Date";
+                empCalculatedg.Columns[10].HeaderText = "Bank Account";
+
+                empCalculatedg.Columns[0].Width = 100;
+                empCalculatedg.Columns[1].Width = 100;
+                empCalculatedg.Columns[2].Width = 100;
+                empCalculatedg.Columns[3].Width = 100;
+                empCalculatedg.Columns[4].Width = 100;
+                empCalculatedg.Columns[5].Width = 100;
+                empCalculatedg.Columns[6].Width = 100;
+                empCalculatedg.Columns[7].Width = 50;
+                empCalculatedg.Columns[8].Width = 100;
+                empCalculatedg.Columns[9].Width = 100;
+                empCalculatedg.Columns[10].Width = 100;
+
+
+          
+          /*  SqlDataAdapter daEmp = new SqlDataAdapter("SELECT * FROM tblEmployee", consql);
+            DataSet dsEmp = new DataSet();
+
+            try
+            {
+                consql.Open();
+                daEmp.Fill(dsEmp, "Employee");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                consql.Close();
+            }
+
+            // Bind the employee ID ComboBox
+            DataTable dt = dsEmp.Tables["Employee"];
+            empid.DataSource = dt;
+            empid.DisplayMember = "EmpID";
+           */
         }
 
         private void calculateSalary_Load(object sender, EventArgs e)
         {
             connection();
             FillData();
+            LoadEmployeeData();
             Clear();
             empsalary.Enabled = false;
             empbankacc.Enabled = false;
@@ -331,6 +384,7 @@ namespace EmployeePayrollManagementSystem
                     if (noofsale.Text != "")
                     {
                         sale = Convert.ToInt16(noofsale.Text);
+                      //  MessageBox.Show(sale.ToString());
                         if (sale >= 1 && sale <= 10)
                         {
                             salebonus = 20000;
@@ -415,7 +469,7 @@ namespace EmployeePayrollManagementSystem
                 SaveAttendanceInformation(attendance.Text, lateday.Text, leaveday.Text, empid.Text);
                 SaveAllowanceInformation(mealAllowance, tranAllowance, empid.Text);
 
-                string nosale = "";
+               // int nosale = 0;
                 string remark = "";
                 if (normal.Checked == true)
                 {
@@ -430,7 +484,8 @@ namespace EmployeePayrollManagementSystem
                     remark = "Excellence";
                 }
                 saveEmployeeRemark(remark, empid.Text);
-                saveNoOfSale(nosale, empid.Text);
+                //saveNoOfSale(nosale, empid.Text);
+                FillData();
             }
             else
             {
@@ -440,33 +495,28 @@ namespace EmployeePayrollManagementSystem
             
 
         private void saveEmployeeRemark(string remark, string empID)
-        {
+        { 
          try{
-                string strInsert = "Update tblEmployee Set Remark = @remark Where EmpID = @empID";
+                string noOfSale = noofsale.Text;
+                string strInsert = "Update tblEmployee Set Remark = @remark,NoOfSale = @sale Where EmpID = @empID";
                 SqlCommand mycmd = new SqlCommand(strInsert, consql);
-
-                // Ensure that you are using the values, not the controls directly
                 mycmd.Parameters.AddWithValue("@remark", remark);
                 mycmd.Parameters.AddWithValue("@empID", empID);
+                mycmd.Parameters.AddWithValue("@sale", noOfSale);               
                 mycmd.ExecuteNonQuery();
-
-              //  MessageBox.Show("Finish save Remark", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-              //  FillData();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+         MessageBox.Show(remark);
         }
-        private void saveNoOfSale(string nosale, string empID)
+        private void saveNoOfSale(int nosale, string empID)
         {
+           
             try
             {
-              //  MessageBox.Show(nosale + empID);
-                int noOfSale = 0;
-
-               // if (int.TryParse(noofsale.Text, out noOfSale))
-              //  {
+                  //  int nosale = 0;
                     using (SqlConnection consql = new SqlConnection("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword"))
                     {
                         consql.Open();
@@ -474,22 +524,17 @@ namespace EmployeePayrollManagementSystem
                         string strInsert = "UPDATE tblEmployee SET NoOfSale = @nosale WHERE EmpID = @empID";
                         using (SqlCommand mycmd = new SqlCommand(strInsert, consql))
                         {
-                            mycmd.Parameters.AddWithValue("@nosale", noOfSale);
+                            mycmd.Parameters.AddWithValue("@nosale", nosale);
                             mycmd.Parameters.AddWithValue("@empID", empID);
                             mycmd.ExecuteNonQuery();
                         }
                     }
- 
-               // }
-               // else
-              //  {
-               //     MessageBox.Show("Please enter a valid number for NoOfSale");
-               // }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+            MessageBox.Show(nosale.ToString());
         }
 
         private void SaveAllowanceInformation(decimal mealallowance, decimal tranallowance, string empID)
@@ -521,9 +566,6 @@ namespace EmployeePayrollManagementSystem
                 mycmd.Parameters.AddWithValue("@TransporationAllowance", tranallowance);  // Use .Text to get the value
                 mycmd.Parameters.AddWithValue("@MealAllowance", mealallowance);
                 mycmd.ExecuteNonQuery();
-
-              //  MessageBox.Show("Finish save allowance", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             catch (Exception)
             {
@@ -555,9 +597,6 @@ namespace EmployeePayrollManagementSystem
                 mycmd.Parameters.AddWithValue("@PaymentDate", paymentdate.Text);  // Use .Text to get the value
                 mycmd.Parameters.AddWithValue("@PaymentAmount", paymentamount);
                 mycmd.ExecuteNonQuery();
-
-            //    MessageBox.Show("Finish save payment", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
             }
             catch (Exception ex)
             {
@@ -590,10 +629,6 @@ namespace EmployeePayrollManagementSystem
                 mycmd.Parameters.AddWithValue("@TotalLeaveDay", leaveday.Text);
 
                 mycmd.ExecuteNonQuery();
-
-            //    MessageBox.Show("Finish save attendance", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                //Clear();
             }
             catch (Exception)
             {
@@ -685,6 +720,7 @@ namespace EmployeePayrollManagementSystem
         private bool Validation()
         {
             bool result = false;
+          
             if (string.IsNullOrEmpty(empid.Text))
             {
                 errorProvider1.Clear();
@@ -694,7 +730,6 @@ namespace EmployeePayrollManagementSystem
                 errorProvider1.Clear();
                 errorProvider1.SetError(attendance, "Attendance Required");
             }
-        
             else
             {
                 errorProvider1.Clear();
@@ -742,19 +777,27 @@ namespace EmployeePayrollManagementSystem
             }
         }
 
-        private void empCalculatedg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void LoadEmployeeData()
         {
-            int rowIndex = empCalculatedg.CurrentRow.Index;
+              SqlDataAdapter daEmpData = new SqlDataAdapter("select * from tblEmployee", consql);
+              DataTable dtEmpData = new DataTable();
 
-            empname.Text = Dset.Tables[0].Rows[rowIndex]["Name"].ToString();
-            empsalary.Text = Dset.Tables[0].Rows[rowIndex]["Salary"].ToString();
-            empbankacc.Text = Dset.Tables[0].Rows[rowIndex]["BankAcc"].ToString();
-            attendance.Text = Dset.Tables[0].Rows[rowIndex]["Attendance"].ToString();
-            lateday.Text = Dset.Tables[0].Rows[rowIndex]["LateDay"].ToString();
-            leaveday.Text = Dset.Tables[0].Rows[rowIndex]["LeaveDay"].ToString();
-            mealallowance.Text = Dset.Tables[0].Rows[rowIndex]["MealAllowance"].ToString();
-            tranallowance.Text = Dset.Tables[0].Rows[rowIndex]["TranAllowance"].ToString();
+              daEmpData.Fill(dtEmpData);
+              empCalculatedg.DataSource = dtEmpData;
 
+
+           /*  string query = "SELECT Name,Address,PhoneNumber,Remark,JoinDate,NoOfSale,BankAccount,Department,Position,BasicSalary FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID LEFT JOIN tblAttendance ON tblEmployee.EmpID = tblAttendance.EmpID";
+            SqlDataAdapter adapter = new SqlDataAdapter(query, consql);
+
+            daEmpData.Fill(dtEmpData);
+            empCalculatedg.DataSource = dtEmpData;
+
+           DataSet Dset = new DataSet();
+            adapter.Fill(Dset, "salaryReport");
+            dtsalary = Dset.Tables["salaryReport"];
+            dgSalary.DataSource = dtsalary;
+
+            */
         }
 
         public string value { get; set; }
@@ -771,5 +814,7 @@ namespace EmployeePayrollManagementSystem
         public string currentDate { get; set; }
 
         public int sale { get; set; }
+
+        public int nosale { get; set; }
     }
 }

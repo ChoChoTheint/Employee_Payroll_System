@@ -16,11 +16,29 @@ namespace EmployeePayrollManagementSystem
         string str;
         DataSet Dset;
         bool close = true;
+        private ErrorProvider errorProvider = new ErrorProvider();
         public addPosition()
         {
             InitializeComponent();
+            //txtbasicsalary.TextChanged += txtbasicsalary_TextChanged_1;
+            txtbasicsalary.TextChanged += txtbasicsalary_TextChanged;
         }
-        
+        private void txtbasicsalary_TextChanged(object sender, EventArgs e)
+        {
+            // Check if the input contains non-numeric characters
+            bool isNumeric = !string.IsNullOrEmpty(txtbasicsalary.Text) && txtbasicsalary.Text.All(char.IsDigit);
+
+            // Show or clear the error message based on the validation result
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(txtbasicsalary, "Please enter a valid numeric value.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtbasicsalary, ""); // Clear the error message
+            }
+        }
+                
         void AutoID()
         {
             int PID = 1; // Initialize CID with 1 as a fallback
@@ -95,13 +113,28 @@ namespace EmployeePayrollManagementSystem
         
         private void btnsave_Click(object sender, EventArgs e)
         {
-            if(Validation()){
-                string strInsert = "Insert Into tblPosition Values ('" + txtid.Text + "','" + txtdept.Text + "','" + txtposition.Text + "','" + txtbasicsalary.Text + "')";
-                SqlCommand mycmd = new SqlCommand(strInsert, consql);
-                mycmd.ExecuteNonQuery();
-                MessageBox.Show("Finish save information", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FillData();
+            
+            if(Validation() == true){
+
+                try
+                {
+                    string strInsert = "Insert Into tblPosition Values ('" + txtid.Text + "','" + txtdept.Text + "','" + txtposition.Text + "','" + txtbasicsalary.Text + "')";
+                    SqlCommand mycmd = new SqlCommand(strInsert, consql);
+                    mycmd.ExecuteNonQuery();
+                    MessageBox.Show("Finish save information", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FillData();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
+            else
+            {
+                MessageBox.Show("Please check filed to correct requirement.");
+            }
+            
         }
 
         private void btnupdate_Click(object sender, EventArgs e)
@@ -198,6 +231,7 @@ namespace EmployeePayrollManagementSystem
         private bool Validation()
         {
             bool result = false;
+            bool isNumeric = !string.IsNullOrEmpty(txtbasicsalary.Text) && txtbasicsalary.Text.All(char.IsDigit);
             if (string.IsNullOrEmpty(txtdept.Text))
             {
                 errorProvider1.Clear();
@@ -210,11 +244,12 @@ namespace EmployeePayrollManagementSystem
                 errorProvider1.SetError(txtposition, "User Name Required");
                 MessageBox.Show("Position Field Required", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (string.IsNullOrEmpty(txtbasicsalary.Text))
+           else if (isNumeric== false)
             {
                 errorProvider1.Clear();
-                errorProvider1.SetError(txtbasicsalary, "User Password Required");
+                errorProvider1.SetError(txtbasicsalary, "Salary Required");
                 MessageBox.Show("Basic Salary Field Required", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               //txtbasicsalary.Text.All(char.IsDigit)
             }
             else
             {
@@ -312,6 +347,10 @@ namespace EmployeePayrollManagementSystem
                 login.Show();
             }
         }
+
+       
+
+       
 
        
 
