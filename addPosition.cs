@@ -20,25 +20,8 @@ namespace EmployeePayrollManagementSystem
         public addPosition()
         {
             InitializeComponent();
-            //txtbasicsalary.TextChanged += txtbasicsalary_TextChanged_1;
             txtbasicsalary.TextChanged += txtbasicsalary_TextChanged;
-        }
-        private void txtbasicsalary_TextChanged(object sender, EventArgs e)
-        {
-            // Check if the input contains non-numeric characters
-            bool isNumeric = !string.IsNullOrEmpty(txtbasicsalary.Text) && txtbasicsalary.Text.All(char.IsDigit);
-
-            // Show or clear the error message based on the validation result
-            if (!isNumeric)
-            {
-                errorProvider1.SetError(txtbasicsalary, "Please enter a valid numeric value.");
-            }
-            else
-            {
-                errorProvider1.SetError(txtbasicsalary, ""); // Clear the error message
-            }
-        }
-                
+        }     
         void AutoID()
         {
             int PID = 1; // Initialize CID with 1 as a fallback
@@ -89,28 +72,20 @@ namespace EmployeePayrollManagementSystem
             txtdept.Text = "";
             txtposition.Text = "";
             txtbasicsalary.Text = "";
+            errorProvider1.Clear();
            
         }
-
+       
         private void addPosition_Load(object sender, EventArgs e)
         {
             str = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword";
             consql = new SqlConnection(str);
             consql.Open();
             FillData();
-
+            AutoID();
             txtid.Enabled = false;
             this.ActiveControl = txtdept;
-            
         }
-
-        private void btnnew_Click(object sender, EventArgs e)
-        {
-             ClearText();
-             AutoID();
-             this.ActiveControl = txtdept;
-        }
-        
         private void btnsave_Click(object sender, EventArgs e)
         {
             
@@ -130,11 +105,6 @@ namespace EmployeePayrollManagementSystem
                 }
                 
             }
-            else
-            {
-                MessageBox.Show("Please check filed to correct requirement.");
-            }
-            
         }
 
         private void btnupdate_Click(object sender, EventArgs e)
@@ -142,7 +112,7 @@ namespace EmployeePayrollManagementSystem
             if (string.IsNullOrEmpty(txtid.Text))
             {
                 errorProvider1.Clear();
-                MessageBox.Show("Choose ID", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Choose ID", "Update Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }else if(Validation())
             {
                 
@@ -193,9 +163,6 @@ namespace EmployeePayrollManagementSystem
                 {
                     close = false;
                     Application.Exit();
-                    //dashboardEmp dashboardEmp = new dashboardEmp();
-                    //this.Hide();
-                    //dashboardEmp.Show();
                 }
                 else
                 {
@@ -203,6 +170,14 @@ namespace EmployeePayrollManagementSystem
                 }
             }        
         }
+        private void txtid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtdept.Focus();
+            }
+        }
+
         private void txtdept_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -210,7 +185,6 @@ namespace EmployeePayrollManagementSystem
                 txtposition.Focus();
             }
         }
-
         private void txtposition_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -219,37 +193,30 @@ namespace EmployeePayrollManagementSystem
             }
         }
 
-        private void txtbasicsalary_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtdept.Focus();
-            }
-        }
-
-        
         private bool Validation()
         {
             bool result = false;
             bool isNumeric = !string.IsNullOrEmpty(txtbasicsalary.Text) && txtbasicsalary.Text.All(char.IsDigit);
-            if (string.IsNullOrEmpty(txtdept.Text))
+            if (string.IsNullOrEmpty(txtid.Text))
             {
                 errorProvider1.Clear();
-                errorProvider1.SetError(txtdept, "User ID Required");
-                MessageBox.Show("Department Field Required", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider1.SetError(txtid, "Please Click New Button!");
             }
+            else if (string.IsNullOrEmpty(txtdept.Text))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtdept, "Department Is Required");
+            }
+            
             else if (string.IsNullOrEmpty(txtposition.Text))
             {
                 errorProvider1.Clear();
-                errorProvider1.SetError(txtposition, "User Name Required");
-                MessageBox.Show("Position Field Required", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider1.SetError(txtposition, "Position Is Required");
             }
            else if (isNumeric== false)
             {
                 errorProvider1.Clear();
-                errorProvider1.SetError(txtbasicsalary, "Salary Required");
-                MessageBox.Show("Basic Salary Field Required", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-               //txtbasicsalary.Text.All(char.IsDigit)
+                errorProvider1.SetError(txtbasicsalary, "Salary Is Required");
             }
             else
             {
@@ -265,76 +232,77 @@ namespace EmployeePayrollManagementSystem
             txtdept.Text = "";
             txtposition.Text = "";
             txtbasicsalary.Text = "";
+            errorProvider1.Clear();
         }
 
         private void admindashboard_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = true;
+            dashboardEmp.Show();
             addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
+            addPosition.Close();
             addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
+            addEmployee.Close();
             calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
+            calculateSalary.Close();
             salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            salaryReport.Close();
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
+            dashboardEmp.Close();
             addPosition addPosition = new addPosition();
-            addPosition.Visible = true;
+            addPosition.Show();
             addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
+            addEmployee.Close();
             calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
+            calculateSalary.Close();
             salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            salaryReport.Close();
         }
 
         private void addemployee_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
+            dashboardEmp.Close();
             addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
+            addPosition.Close();
             addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = true;
+            addEmployee.Show();
             calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
+            calculateSalary.Close();
             salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            salaryReport.Close();
         }
 
         private void calculatesalary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
+            dashboardEmp.Close();
             addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
+            addPosition.Close();
             addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
+            addEmployee.Close();
             calculateSalary calculateSalary = new calculateSalary();
             calculateSalary.Visible = true;
             salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            salaryReport.Close();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
+            dashboardEmp.Close();
             addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
+            addPosition.Close();
             addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
+            addEmployee.Close();
             calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
+            calculateSalary.Close();
             salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = true;
+            salaryReport.Show();
         }
 
         private void logout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -343,11 +311,51 @@ namespace EmployeePayrollManagementSystem
             if (result == DialogResult.Yes)
             {
                 login login = new login();
-                this.Hide();
+                this.Close();
                 login.Show();
             }
         }
+        private void txtbasicsalary_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumeric = !string.IsNullOrEmpty(txtbasicsalary.Text) && txtbasicsalary.Text.All(char.IsDigit);
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(txtbasicsalary, "Please enter a valid numeric value.");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+        private void txtdept_TextChanged(object sender, EventArgs e)
+        {
+            bool isChar = !string.IsNullOrEmpty(txtdept.Text) && txtdept.Text.All(char.IsDigit);
+            if (isChar == true)
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtdept, "Department Field Must Be Char!");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
 
+        private void txtposition_TextChanged(object sender, EventArgs e)
+        {
+            bool isChar = !string.IsNullOrEmpty(txtposition.Text) && txtposition.Text.All(char.IsDigit);
+            if (isChar == true)
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtposition, "Position Field Must Be Char!");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+
+       
        
 
        

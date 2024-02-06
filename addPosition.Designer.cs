@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(addPosition));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtbasicsalary = new System.Windows.Forms.TextBox();
             this.btnclear = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btndelete = new System.Windows.Forms.Button();
@@ -47,29 +48,28 @@
             this.dataView = new System.Windows.Forms.DataGridView();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.admindashboard = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.addemployee = new System.Windows.Forms.LinkLabel();
             this.calculatesalary = new System.Windows.Forms.LinkLabel();
             this.logout = new System.Windows.Forms.LinkLabel();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtbasicsalary = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -89,14 +89,24 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(657, 12);
+            this.panel1.ForeColor = System.Drawing.Color.Transparent;
+            this.panel1.Location = new System.Drawing.Point(559, 22);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(710, 485);
             this.panel1.TabIndex = 1;
             // 
+            // txtbasicsalary
+            // 
+            this.txtbasicsalary.Location = new System.Drawing.Point(340, 291);
+            this.txtbasicsalary.Multiline = true;
+            this.txtbasicsalary.Name = "txtbasicsalary";
+            this.txtbasicsalary.Size = new System.Drawing.Size(162, 37);
+            this.txtbasicsalary.TabIndex = 10;
+            this.txtbasicsalary.TextChanged += new System.EventHandler(this.txtbasicsalary_TextChanged);
+            // 
             // btnclear
             // 
-            this.btnclear.BackColor = System.Drawing.Color.Crimson;
+            this.btnclear.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnclear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnclear.Location = new System.Drawing.Point(562, 413);
             this.btnclear.Name = "btnclear";
@@ -118,7 +128,7 @@
             // 
             // btndelete
             // 
-            this.btndelete.BackColor = System.Drawing.Color.Crimson;
+            this.btndelete.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btndelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btndelete.Location = new System.Drawing.Point(438, 413);
             this.btndelete.Name = "btndelete";
@@ -130,7 +140,7 @@
             // 
             // btnupdate
             // 
-            this.btnupdate.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnupdate.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnupdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnupdate.Location = new System.Drawing.Point(312, 413);
             this.btnupdate.Name = "btnupdate";
@@ -142,7 +152,7 @@
             // 
             // btnnew
             // 
-            this.btnnew.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnnew.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnnew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnnew.Location = new System.Drawing.Point(58, 413);
             this.btnnew.Name = "btnnew";
@@ -150,11 +160,10 @@
             this.btnnew.TabIndex = 6;
             this.btnnew.Text = "New";
             this.btnnew.UseVisualStyleBackColor = false;
-            this.btnnew.Click += new System.EventHandler(this.btnnew_Click);
             // 
             // btnsave
             // 
-            this.btnsave.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnsave.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnsave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnsave.Location = new System.Drawing.Point(182, 413);
             this.btnsave.Name = "btnsave";
@@ -171,6 +180,7 @@
             this.txtposition.Name = "txtposition";
             this.txtposition.Size = new System.Drawing.Size(161, 35);
             this.txtposition.TabIndex = 5;
+            this.txtposition.TextChanged += new System.EventHandler(this.txtposition_TextChanged);
             this.txtposition.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtposition_KeyDown);
             // 
             // txtdept
@@ -180,6 +190,7 @@
             this.txtdept.Name = "txtdept";
             this.txtdept.Size = new System.Drawing.Size(161, 35);
             this.txtdept.TabIndex = 5;
+            this.txtdept.TextChanged += new System.EventHandler(this.txtdept_TextChanged);
             this.txtdept.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtdept_KeyDown);
             // 
             // txtid
@@ -189,6 +200,7 @@
             this.txtid.Name = "txtid";
             this.txtid.Size = new System.Drawing.Size(161, 35);
             this.txtid.TabIndex = 5;
+            this.txtid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtid_KeyDown);
             // 
             // label6
             // 
@@ -233,10 +245,10 @@
             // dataView
             // 
             this.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataView.Location = new System.Drawing.Point(446, 516);
+            this.dataView.Location = new System.Drawing.Point(470, 545);
             this.dataView.Name = "dataView";
             this.dataView.RowTemplate.Height = 24;
-            this.dataView.Size = new System.Drawing.Size(1066, 413);
+            this.dataView.Size = new System.Drawing.Size(897, 413);
             this.dataView.TabIndex = 2;
             this.dataView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataView_CellContentClick);
             // 
@@ -247,28 +259,91 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGreen;
+            this.panel2.Controls.Add(this.pictureBox3);
+            this.panel2.Controls.Add(this.pictureBox11);
+            this.panel2.Controls.Add(this.pictureBox6);
+            this.panel2.Controls.Add(this.pictureBox5);
+            this.panel2.Controls.Add(this.pictureBox4);
+            this.panel2.Controls.Add(this.pictureBox7);
             this.panel2.Controls.Add(this.linkLabel1);
             this.panel2.Controls.Add(this.admindashboard);
             this.panel2.Controls.Add(this.linkLabel2);
             this.panel2.Controls.Add(this.addemployee);
             this.panel2.Controls.Add(this.calculatesalary);
             this.panel2.Controls.Add(this.logout);
-            this.panel2.Controls.Add(this.pictureBox6);
-            this.panel2.Controls.Add(this.pictureBox5);
-            this.panel2.Controls.Add(this.pictureBox4);
-            this.panel2.Controls.Add(this.pictureBox3);
-            this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.ForeColor = System.Drawing.Color.White;
             this.panel2.Location = new System.Drawing.Point(2, 1);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(425, 1008);
             this.panel2.TabIndex = 5;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(105, 252);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(45, 38);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 35;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
+            this.pictureBox11.Location = new System.Drawing.Point(105, 584);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.TabIndex = 34;
+            this.pictureBox11.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(105, 680);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 31;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(105, 505);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 32;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(105, 416);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 33;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(105, 333);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(45, 35);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 30;
+            this.pictureBox7.TabStop = false;
+            // 
             // linkLabel1
             // 
+            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel1.ForeColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.LinkColor = System.Drawing.Color.Transparent;
             this.linkLabel1.Location = new System.Drawing.Point(178, 594);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(86, 29);
@@ -279,9 +354,11 @@
             // 
             // admindashboard
             // 
+            this.admindashboard.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.admindashboard.AutoSize = true;
             this.admindashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admindashboard.LinkColor = System.Drawing.Color.Black;
+            this.admindashboard.ForeColor = System.Drawing.Color.Transparent;
+            this.admindashboard.LinkColor = System.Drawing.Color.Transparent;
             this.admindashboard.Location = new System.Drawing.Point(178, 252);
             this.admindashboard.Name = "admindashboard";
             this.admindashboard.Size = new System.Drawing.Size(131, 29);
@@ -292,9 +369,11 @@
             // 
             // linkLabel2
             // 
+            this.linkLabel2.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel2.ForeColor = System.Drawing.Color.Transparent;
+            this.linkLabel2.LinkColor = System.Drawing.Color.Transparent;
             this.linkLabel2.Location = new System.Drawing.Point(178, 339);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(149, 29);
@@ -305,9 +384,11 @@
             // 
             // addemployee
             // 
+            this.addemployee.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.addemployee.AutoSize = true;
             this.addemployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addemployee.LinkColor = System.Drawing.Color.Black;
+            this.addemployee.ForeColor = System.Drawing.Color.Transparent;
+            this.addemployee.LinkColor = System.Drawing.Color.Transparent;
             this.addemployee.Location = new System.Drawing.Point(178, 426);
             this.addemployee.Name = "addemployee";
             this.addemployee.Size = new System.Drawing.Size(171, 29);
@@ -318,9 +399,11 @@
             // 
             // calculatesalary
             // 
+            this.calculatesalary.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.calculatesalary.AutoSize = true;
             this.calculatesalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calculatesalary.LinkColor = System.Drawing.Color.Black;
+            this.calculatesalary.ForeColor = System.Drawing.Color.Transparent;
+            this.calculatesalary.LinkColor = System.Drawing.Color.Transparent;
             this.calculatesalary.Location = new System.Drawing.Point(178, 515);
             this.calculatesalary.Name = "calculatesalary";
             this.calculatesalary.Size = new System.Drawing.Size(186, 29);
@@ -331,9 +414,11 @@
             // 
             // logout
             // 
+            this.logout.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.logout.AutoSize = true;
             this.logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logout.LinkColor = System.Drawing.Color.Black;
+            this.logout.ForeColor = System.Drawing.Color.Transparent;
+            this.logout.LinkColor = System.Drawing.Color.Transparent;
             this.logout.Location = new System.Drawing.Point(178, 680);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(98, 29);
@@ -341,74 +426,6 @@
             this.logout.TabStop = true;
             this.logout.Text = "Log Out";
             this.logout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.logout_LinkClicked);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(105, 680);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(45, 39);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 14;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::EmployeePayrollManagementSystem.Properties.Resources.salary;
-            this.pictureBox5.Location = new System.Drawing.Point(105, 505);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(45, 39);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 15;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(105, 416);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(45, 39);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 16;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(105, 333);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(45, 35);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 13;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(105, 252);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(45, 38);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 12;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::EmployeePayrollManagementSystem.Properties.Resources.upload_img;
-            this.pictureBox1.Location = new System.Drawing.Point(120, 40);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(156, 167);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // txtbasicsalary
-            // 
-            this.txtbasicsalary.Location = new System.Drawing.Point(342, 297);
-            this.txtbasicsalary.Name = "txtbasicsalary";
-            this.txtbasicsalary.Size = new System.Drawing.Size(161, 22);
-            this.txtbasicsalary.TabIndex = 10;
-            this.txtbasicsalary.TextChanged += new System.EventHandler(this.txtbasicsalary_TextChanged);
             // 
             // addPosition
             // 
@@ -418,6 +435,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dataView);
             this.Controls.Add(this.panel1);
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "addPosition";
             this.Text = "addPosition";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.addPosition_FormClosed);
@@ -428,12 +446,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -463,12 +481,12 @@
         private System.Windows.Forms.LinkLabel addemployee;
         private System.Windows.Forms.LinkLabel calculatesalary;
         private System.Windows.Forms.LinkLabel logout;
+        private System.Windows.Forms.TextBox txtbasicsalary;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox txtbasicsalary;
+        private System.Windows.Forms.PictureBox pictureBox7;
     }
 }

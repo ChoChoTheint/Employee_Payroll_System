@@ -501,6 +501,62 @@ namespace EmployeePayrollManagementSystem
             }
         }
 
+        private void empph_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumeric = !string.IsNullOrEmpty(empph.Text) && empph.Text.All(char.IsDigit) && empph.Text.Length == 11;
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(empph, "Please enter a valid phone number");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+
+        }
+
+        private void empemail_TextChanged(object sender, EventArgs e)
+        {
+            bool isChar = !string.IsNullOrEmpty(empemail.Text)  && empemail.Text == @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            if (!isChar)
+            {
+                errorProvider1.SetError(empemail, "Please enter a valid email format");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+
+        private void empname_TextChanged(object sender, EventArgs e)
+        {
+            bool isChar = !string.IsNullOrEmpty(empname.Text) && empname.Text.All(char.IsDigit);
+            if (isChar == true)
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(empname, "Please enter a valid name format");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+
+        private void empbankacc_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumeric = !string.IsNullOrEmpty(empbankacc.Text) && empbankacc.Text.All(char.IsDigit) && (empbankacc.Text.Length == 11 || empbankacc.Text.Length == 12);
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(empbankacc, "Please enter a valid bank acc");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+       
+      
+
     }
 }
 

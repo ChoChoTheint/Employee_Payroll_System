@@ -99,14 +99,14 @@ namespace EmployeePayrollManagementSystem
                 empCalculatedg.Columns[0].HeaderText = "ID";
                 empCalculatedg.Columns[1].HeaderText = "PositioinID";
                 empCalculatedg.Columns[2].HeaderText = "Name";
-                empCalculatedg.Columns[3].HeaderText = "Email";
-                empCalculatedg.Columns[4].HeaderText = "Address";
-                empCalculatedg.Columns[5].HeaderText = "Phone";
-                empCalculatedg.Columns[6].HeaderText = "NRC";
-                empCalculatedg.Columns[7].HeaderText = "DOB";
-                empCalculatedg.Columns[8].HeaderText = "Gender";
-                empCalculatedg.Columns[9].HeaderText = "Join Date";
-                empCalculatedg.Columns[10].HeaderText = "Bank Account";
+                empCalculatedg.Columns[3].HeaderText = "Address";
+                empCalculatedg.Columns[4].HeaderText = "Phone No";
+                empCalculatedg.Columns[5].HeaderText = "NRC";
+                empCalculatedg.Columns[6].HeaderText = "DOB";
+                empCalculatedg.Columns[7].HeaderText = "Gender";
+                empCalculatedg.Columns[8].HeaderText = "Email";
+                empCalculatedg.Columns[9].HeaderText = "Remark";
+                empCalculatedg.Columns[10].HeaderText = "Join Date";
 
                 empCalculatedg.Columns[0].Width = 100;
                 empCalculatedg.Columns[1].Width = 100;
@@ -190,10 +190,14 @@ namespace EmployeePayrollManagementSystem
                 string empJoinDateText = empjoindate.Text;
                 DateTime empJoinDate = DateTime.Parse(empJoinDateText);
                 TimeSpan difference = DateTime.Today - empJoinDate;
+             //   int months = (DateTime.Today.Year - empJoinDate.Year) * 12 + DateTime.Today.Month - empJoinDate.Month;
+                int months = difference.Days / 30; 
+             //   MessageBox.Show("months " + months);
                 int daysDifference = difference.Days;
-                if (daysDifference <= 30)
+                if (daysDifference <= 30 && months == 0)
                 {
                     MessageBox.Show("Join Date is " + daysDifference + "\n Please Enter " + daysDifference + " In Attendance!");
+                    MessageBox.Show("This months salary must be get");
                 }
 
                 DateTime currentDateOnly = DateTime.Today;
@@ -462,7 +466,7 @@ namespace EmployeePayrollManagementSystem
                 }
 
                 string paymentamount = totalpayment.ToString("0.");
-                MessageBox.Show("Payment Amount: " + paymentamount + "\n sale bonus" + salebonus);
+                MessageBox.Show("Payment Amount: " + paymentamount + "\n sale bonus " + salebonus + "\n Attendance " + attendance.Text + "\n Late day " + lateday.Text + "\n Leave day " + leaveday.Text);
 
 
                 SavePaymentInformation(paymentamount, empid.Text);
@@ -509,7 +513,7 @@ namespace EmployeePayrollManagementSystem
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-         MessageBox.Show(remark);
+        // MessageBox.Show(remark);
         }
         private void saveNoOfSale(int nosale, string empID)
         {
@@ -534,7 +538,7 @@ namespace EmployeePayrollManagementSystem
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            MessageBox.Show(nosale.ToString());
+          //  MessageBox.Show(nosale.ToString());
         }
 
         private void SaveAllowanceInformation(decimal mealallowance, decimal tranallowance, string empID)
@@ -723,11 +727,9 @@ namespace EmployeePayrollManagementSystem
           
             if (string.IsNullOrEmpty(empid.Text))
             {
-                errorProvider1.Clear();
                 errorProvider1.SetError(empid, "Please Choose Employee ID");
             }else if (string.IsNullOrEmpty(attendance.Text))
             {
-                errorProvider1.Clear();
                 errorProvider1.SetError(attendance, "Attendance Required");
             }
             else
@@ -816,5 +818,69 @@ namespace EmployeePayrollManagementSystem
         public int sale { get; set; }
 
         public int nosale { get; set; }
+
+        private void empCalculatedg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i;
+            i = empCalculatedg.CurrentRow.Index;
+            empid.Text = Dset.Tables[0].Rows[i][0].ToString();
+            empname.Text = Dset.Tables[0].Rows[i][1].ToString();
+            empsalary.Text = Dset.Tables[0].Rows[i][2].ToString();
+            empbankacc.Text = Dset.Tables[0].Rows[i][3].ToString();
+            empjoindate.Text = Dset.Tables[0].Rows[i][3].ToString();
+
+        }
+
+        private void attendance_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumeric = !string.IsNullOrEmpty(attendance.Text) && attendance.Text.All(char.IsDigit);
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(attendance, "Please enter a valid");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+
+        private void lateday_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumeric = !string.IsNullOrEmpty(lateday.Text) && lateday.Text.All(char.IsDigit);
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(lateday, "Please enter a valid");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+
+        private void leaveday_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumeric = !string.IsNullOrEmpty(leaveday.Text) && leaveday.Text.All(char.IsDigit);
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(leaveday, "Please enter a valid");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
+
+        private void noofsale_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumeric = !string.IsNullOrEmpty(noofsale.Text) && noofsale.Text.All(char.IsDigit);
+            if (!isNumeric)
+            {
+                errorProvider1.SetError(noofsale, "Please enter a valid");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+        }
     }
 }

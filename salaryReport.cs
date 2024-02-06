@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace EmployeePayrollManagementSystem
 {
@@ -45,7 +47,7 @@ namespace EmployeePayrollManagementSystem
         {
             connection();
             //string query = "select* from tblEmployee join tblPosition where tblEmployee.PositionID = tblPosition.PositionID";
-             string query = "SELECT Name,Address,PhoneNumber,Remark,JoinDate,NoOfSale,BankAccount,Department,Position,BasicSalary FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID LEFT JOIN tblAttendance ON tblEmployee.EmpID = tblAttendance.EmpID";
+            string query = "SELECT DISTINCT Name,Address,PhoneNumber,Remark,JoinDate,NoOfSale,BankAccount,Department,Position,BasicSalary FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID LEFT JOIN tblAttendance ON tblEmployee.EmpID = tblAttendance.EmpID";
           //  string query = "SELECT Name,Address,PhoneNumber,Remark,JoinDate,NoOfSale,BankAccount,Department,Position,BasicSalary,Attendance,LateDay,LeaveDay,PaymentAmount,tblForm.Form FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID LEFT JOIN tblAttendance ON tblEmployee.EmpID = tblAttendance.EmpID LEFT JOIN tblPayment ON tblEmployee.EmpID = tblPayment.EmpID LEFT JOIN tblEmployee ON tblEmployee.EmpID = tblEmployee.EmpID LEFT JOIN tblForm ON tblEmployee.EmpID = tblForm.EmpID;";
 
             SqlDataAdapter adapter = new SqlDataAdapter(query, consql);
@@ -57,10 +59,40 @@ namespace EmployeePayrollManagementSystem
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            /*
+           string chk = txtreport.Text;
+           SqlConnection con = new SqlConnection("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword");
+           SqlCommand cmd = new SqlCommand("SELECT * FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID WHERE Name LIKE @Name OR Department LIKE @Department OR BasicSalary LIKE @BasicSalary'"+chk+"'", con);
+           SqlDataAdapter sda = new SqlDataAdapter(cmd);
+           DataSet ds = new DataSet();
+           sda.Fill(ds);
+
+           ReportShowForm ReportShowForm = new ReportShowForm();
+           employeeReport report = new employeeReport();
+           report.Load(Server.MapPath("employeeReport.rpt"));
+           report.SetDataSource(ds.Tables["table"]);
+
+         //  ReportShowForm.crystalReportViewer1.ReportSource = report;
+           ReportShowForm.crystalReportViewer1.ReportSource = report;
+           report.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, "Employee Information");
+
+
+
+          report code
+           ReportShowForm ReportShowForm = new ReportShowForm();
+           employeeReport report = new employeeReport();
+
+           TextObject first =(TextObject) report.ReportDefinition.Sections["Section3"].ReportObjects["empidtext"];
+           first.Text = txtreport.Text;
+           ReportShowForm.crystalReportViewer1.ReportSource = report;
+           ReportShowForm.Show();
+
+           */
+          // filter code
             try
             {
                 string nameValue = txtreport.Text;
-                string query = "SELECT Name,Address,PhoneNumber,Remark,JoinDate,NoOfSale,BankAccount,Department,Position,BasicSalary FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID WHERE Name LIKE @Name OR Department LIKE @Department OR BasicSalary LIKE @BasicSalary";
+                string query = "SELECT DISTINCT Name,Address,PhoneNumber,Remark,JoinDate,NoOfSale,BankAccount,Department,Position,BasicSalary FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID WHERE Name LIKE @Name OR Department LIKE @Department OR BasicSalary LIKE @BasicSalary";
 
                 SqlDataAdapter adapter = new SqlDataAdapter(query, consql);
                 adapter.SelectCommand.Parameters.AddWithValue("@Name", "%" + nameValue + "%");
@@ -77,6 +109,7 @@ namespace EmployeePayrollManagementSystem
             {
                 Console.WriteLine("Exception: " + ex.Message);
             }
+             
         }
 
         private void salaryReport_FormClosing(object sender, FormClosingEventArgs e)

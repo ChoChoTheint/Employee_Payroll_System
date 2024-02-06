@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 namespace EmployeePayrollManagementSystem
 {
+
     public partial class dashboardEmp : Form
     {
         bool close = true;
@@ -19,6 +20,7 @@ namespace EmployeePayrollManagementSystem
         {
             InitializeComponent();
         }
+
         void connection()
         {
             str = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword";
@@ -159,6 +161,13 @@ namespace EmployeePayrollManagementSystem
                 login.Show();
             }
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        
 
     }
 }

@@ -64,27 +64,31 @@
             this.label2 = new System.Windows.Forms.Label();
             this.empCalculatedg = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.admindashboard = new System.Windows.Forms.LinkLabel();
             this.addposition = new System.Windows.Forms.LinkLabel();
             this.addemployee = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.logout = new System.Windows.Forms.LinkLabel();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.empCalculatedg)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -123,6 +127,7 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
+            this.panel1.ForeColor = System.Drawing.Color.Transparent;
             this.panel1.Location = new System.Drawing.Point(443, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1232, 509);
@@ -135,6 +140,7 @@
             this.noofsale.Name = "noofsale";
             this.noofsale.Size = new System.Drawing.Size(161, 35);
             this.noofsale.TabIndex = 27;
+            this.noofsale.TextChanged += new System.EventHandler(this.noofsale_TextChanged);
             // 
             // label9
             // 
@@ -225,6 +231,7 @@
             this.lateday.Name = "lateday";
             this.lateday.Size = new System.Drawing.Size(161, 35);
             this.lateday.TabIndex = 18;
+            this.lateday.TextChanged += new System.EventHandler(this.lateday_TextChanged);
             // 
             // label15
             // 
@@ -279,6 +286,7 @@
             this.leaveday.Name = "leaveday";
             this.leaveday.Size = new System.Drawing.Size(161, 35);
             this.leaveday.TabIndex = 11;
+            this.leaveday.TextChanged += new System.EventHandler(this.leaveday_TextChanged);
             // 
             // empbankacc
             // 
@@ -305,6 +313,7 @@
             this.attendance.Name = "attendance";
             this.attendance.Size = new System.Drawing.Size(161, 35);
             this.attendance.TabIndex = 12;
+            this.attendance.TextChanged += new System.EventHandler(this.attendance_TextChanged);
             // 
             // label12
             // 
@@ -357,7 +366,7 @@
             // 
             // clearBtn
             // 
-            this.clearBtn.BackColor = System.Drawing.Color.Crimson;
+            this.clearBtn.BackColor = System.Drawing.Color.ForestGreen;
             this.clearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearBtn.Location = new System.Drawing.Point(652, 416);
             this.clearBtn.Name = "clearBtn";
@@ -369,7 +378,7 @@
             // 
             // btncalculate
             // 
-            this.btncalculate.BackColor = System.Drawing.Color.SteelBlue;
+            this.btncalculate.BackColor = System.Drawing.Color.ForestGreen;
             this.btncalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btncalculate.Location = new System.Drawing.Point(401, 418);
             this.btncalculate.Name = "btncalculate";
@@ -433,33 +442,103 @@
             this.empCalculatedg.RowTemplate.Height = 24;
             this.empCalculatedg.Size = new System.Drawing.Size(1232, 283);
             this.empCalculatedg.TabIndex = 7;
-       //     this.empCalculatedg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empCalculatedg_CellContentClick);
+            this.empCalculatedg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.empCalculatedg_CellContentClick);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGreen;
+            this.panel2.Controls.Add(this.pictureBox7);
+            this.panel2.Controls.Add(this.pictureBox6);
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.pictureBox11);
+            this.panel2.Controls.Add(this.pictureBox5);
+            this.panel2.Controls.Add(this.pictureBox4);
+            this.panel2.Controls.Add(this.pictureBox3);
             this.panel2.Controls.Add(this.linkLabel1);
             this.panel2.Controls.Add(this.admindashboard);
             this.panel2.Controls.Add(this.addposition);
             this.panel2.Controls.Add(this.addemployee);
             this.panel2.Controls.Add(this.linkLabel2);
             this.panel2.Controls.Add(this.logout);
-            this.panel2.Controls.Add(this.pictureBox6);
-            this.panel2.Controls.Add(this.pictureBox5);
-            this.panel2.Controls.Add(this.pictureBox4);
-            this.panel2.Controls.Add(this.pictureBox3);
-            this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(12, 1);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(425, 1008);
             this.panel2.TabIndex = 8;
             // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Location = new System.Drawing.Point(109, 670);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 36;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(109, 252);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(45, 38);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 35;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
+            this.pictureBox11.Location = new System.Drawing.Point(109, 590);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.TabIndex = 34;
+            this.pictureBox11.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(109, 511);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 32;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(109, 422);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 33;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(109, 339);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(45, 35);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 30;
+            this.pictureBox3.TabStop = false;
+            // 
             // linkLabel1
             // 
+            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel1.LinkColor = System.Drawing.Color.Transparent;
             this.linkLabel1.Location = new System.Drawing.Point(178, 594);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(86, 29);
@@ -470,9 +549,10 @@
             // 
             // admindashboard
             // 
+            this.admindashboard.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.admindashboard.AutoSize = true;
             this.admindashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admindashboard.LinkColor = System.Drawing.Color.Black;
+            this.admindashboard.LinkColor = System.Drawing.Color.Transparent;
             this.admindashboard.Location = new System.Drawing.Point(178, 252);
             this.admindashboard.Name = "admindashboard";
             this.admindashboard.Size = new System.Drawing.Size(131, 29);
@@ -483,9 +563,10 @@
             // 
             // addposition
             // 
+            this.addposition.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.addposition.AutoSize = true;
             this.addposition.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addposition.LinkColor = System.Drawing.Color.Black;
+            this.addposition.LinkColor = System.Drawing.Color.Transparent;
             this.addposition.Location = new System.Drawing.Point(178, 339);
             this.addposition.Name = "addposition";
             this.addposition.Size = new System.Drawing.Size(149, 29);
@@ -496,9 +577,10 @@
             // 
             // addemployee
             // 
+            this.addemployee.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.addemployee.AutoSize = true;
             this.addemployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addemployee.LinkColor = System.Drawing.Color.Black;
+            this.addemployee.LinkColor = System.Drawing.Color.Transparent;
             this.addemployee.Location = new System.Drawing.Point(178, 426);
             this.addemployee.Name = "addemployee";
             this.addemployee.Size = new System.Drawing.Size(171, 29);
@@ -509,9 +591,10 @@
             // 
             // linkLabel2
             // 
+            this.linkLabel2.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel2.LinkColor = System.Drawing.Color.Transparent;
             this.linkLabel2.Location = new System.Drawing.Point(178, 515);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(186, 29);
@@ -522,9 +605,10 @@
             // 
             // logout
             // 
+            this.logout.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.logout.AutoSize = true;
             this.logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logout.LinkColor = System.Drawing.Color.Black;
+            this.logout.LinkColor = System.Drawing.Color.Transparent;
             this.logout.Location = new System.Drawing.Point(178, 680);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(98, 29);
@@ -532,56 +616,6 @@
             this.logout.TabStop = true;
             this.logout.Text = "Log Out";
             this.logout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.logout_LinkClicked_1);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(105, 680);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(45, 39);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 14;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::EmployeePayrollManagementSystem.Properties.Resources.salary;
-            this.pictureBox5.Location = new System.Drawing.Point(105, 505);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(45, 39);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 15;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(105, 416);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(45, 39);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 16;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(105, 333);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(45, 35);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 13;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(105, 252);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(45, 38);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 12;
-            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -614,11 +648,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.empCalculatedg)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -658,11 +694,6 @@
         private System.Windows.Forms.LinkLabel addemployee;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel logout;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DateTimePicker paymentdate;
         private System.Windows.Forms.DateTimePicker empjoindate;
@@ -674,5 +705,12 @@
         private System.Windows.Forms.RadioButton excellence;
         private System.Windows.Forms.TextBox noofsale;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox7;
     }
 }

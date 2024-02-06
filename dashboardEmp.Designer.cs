@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dashboardEmp));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.sale = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -44,6 +45,7 @@
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.salecount = new System.Windows.Forms.LinkLabel();
             this.admindashboard = new System.Windows.Forms.LinkLabel();
             this.addposition = new System.Windows.Forms.LinkLabel();
@@ -56,7 +58,6 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.sale = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -66,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -77,6 +79,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.ForestGreen;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
@@ -89,7 +92,7 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel5.BackColor = System.Drawing.Color.ForestGreen;
             this.panel5.Controls.Add(this.sale);
             this.panel5.Controls.Add(this.pictureBox10);
             this.panel5.Controls.Add(this.label12);
@@ -97,6 +100,16 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(250, 193);
             this.panel5.TabIndex = 16;
+            // 
+            // sale
+            // 
+            this.sale.AutoSize = true;
+            this.sale.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sale.Location = new System.Drawing.Point(180, 52);
+            this.sale.Name = "sale";
+            this.sale.Size = new System.Drawing.Size(26, 29);
+            this.sale.TabIndex = 15;
+            this.sale.Text = "0";
             // 
             // pictureBox10
             // 
@@ -120,7 +133,7 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel4.BackColor = System.Drawing.Color.ForestGreen;
             this.panel4.Controls.Add(this.bonuscount);
             this.panel4.Controls.Add(this.pictureBox9);
             this.panel4.Controls.Add(this.label5);
@@ -161,7 +174,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel3.BackColor = System.Drawing.Color.ForestGreen;
             this.panel3.Controls.Add(this.empcount);
             this.panel3.Controls.Add(this.pictureBox8);
             this.panel3.Controls.Add(this.label2);
@@ -223,6 +236,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGreen;
+            this.panel2.Controls.Add(this.pictureBox11);
             this.panel2.Controls.Add(this.salecount);
             this.panel2.Controls.Add(this.admindashboard);
             this.panel2.Controls.Add(this.addposition);
@@ -239,12 +253,24 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(522, 1008);
             this.panel2.TabIndex = 7;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
+            this.pictureBox11.Location = new System.Drawing.Point(105, 584);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(45, 39);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.TabIndex = 23;
+            this.pictureBox11.TabStop = false;
             // 
             // salecount
             // 
+            this.salecount.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.salecount.AutoSize = true;
             this.salecount.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.salecount.LinkColor = System.Drawing.Color.Black;
+            this.salecount.LinkColor = System.Drawing.Color.Transparent;
             this.salecount.Location = new System.Drawing.Point(178, 594);
             this.salecount.Name = "salecount";
             this.salecount.Size = new System.Drawing.Size(86, 29);
@@ -255,9 +281,10 @@
             // 
             // admindashboard
             // 
+            this.admindashboard.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.admindashboard.AutoSize = true;
             this.admindashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admindashboard.LinkColor = System.Drawing.Color.Black;
+            this.admindashboard.LinkColor = System.Drawing.Color.Transparent;
             this.admindashboard.Location = new System.Drawing.Point(178, 252);
             this.admindashboard.Name = "admindashboard";
             this.admindashboard.Size = new System.Drawing.Size(131, 29);
@@ -267,9 +294,10 @@
             // 
             // addposition
             // 
+            this.addposition.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.addposition.AutoSize = true;
             this.addposition.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addposition.LinkColor = System.Drawing.Color.Black;
+            this.addposition.LinkColor = System.Drawing.Color.Transparent;
             this.addposition.Location = new System.Drawing.Point(178, 339);
             this.addposition.Name = "addposition";
             this.addposition.Size = new System.Drawing.Size(149, 29);
@@ -280,9 +308,10 @@
             // 
             // addemployee
             // 
+            this.addemployee.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.addemployee.AutoSize = true;
             this.addemployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addemployee.LinkColor = System.Drawing.Color.Black;
+            this.addemployee.LinkColor = System.Drawing.Color.Transparent;
             this.addemployee.Location = new System.Drawing.Point(178, 426);
             this.addemployee.Name = "addemployee";
             this.addemployee.Size = new System.Drawing.Size(171, 29);
@@ -293,9 +322,10 @@
             // 
             // calculatesalary
             // 
+            this.calculatesalary.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.calculatesalary.AutoSize = true;
             this.calculatesalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calculatesalary.LinkColor = System.Drawing.Color.Black;
+            this.calculatesalary.LinkColor = System.Drawing.Color.Transparent;
             this.calculatesalary.Location = new System.Drawing.Point(178, 515);
             this.calculatesalary.Name = "calculatesalary";
             this.calculatesalary.Size = new System.Drawing.Size(186, 29);
@@ -306,9 +336,10 @@
             // 
             // logout
             // 
+            this.logout.ActiveLinkColor = System.Drawing.Color.Transparent;
             this.logout.AutoSize = true;
             this.logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logout.LinkColor = System.Drawing.Color.Black;
+            this.logout.LinkColor = System.Drawing.Color.Transparent;
             this.logout.Location = new System.Drawing.Point(178, 680);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(98, 29);
@@ -329,7 +360,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = global::EmployeePayrollManagementSystem.Properties.Resources.salary;
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.Location = new System.Drawing.Point(105, 505);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(45, 39);
@@ -377,16 +408,6 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // sale
-            // 
-            this.sale.AutoSize = true;
-            this.sale.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sale.Location = new System.Drawing.Point(180, 52);
-            this.sale.Name = "sale";
-            this.sale.Size = new System.Drawing.Size(26, 29);
-            this.sale.TabIndex = 15;
-            this.sale.Text = "0";
-            // 
             // dashboardEmp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -395,6 +416,7 @@
             this.ClientSize = new System.Drawing.Size(1924, 1021);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.ForeColor = System.Drawing.Color.Transparent;
             this.Name = "dashboardEmp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "dashboardEmp";
@@ -414,6 +436,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -454,5 +477,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label sale;
+        private System.Windows.Forms.PictureBox pictureBox11;
     }
 }
