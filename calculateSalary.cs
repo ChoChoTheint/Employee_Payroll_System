@@ -13,7 +13,6 @@ namespace EmployeePayrollManagementSystem
 {
     public partial class calculateSalary : Form
     {
-        bool close = true;
         SqlConnection consql;
         string str;
         DataSet Dset;
@@ -23,60 +22,14 @@ namespace EmployeePayrollManagementSystem
         }
         void connection()
         {
-            str = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword";
+            str = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=epms;Integrated Security=True";
             consql = new SqlConnection(str);
             consql.Open();
         }
-        private void admindashboard_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            MainForm dashboard = new MainForm();
-            this.Hide();
-            dashboard.Show();
-        }
-
-        private void addposition_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            addPosition addPosition = new addPosition();
-            this.Hide();
-            addPosition.Show();
-        }
-
-        private void addemployee_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            addEmployee addEmployee = new addEmployee();
-            this.Hide();
-            addEmployee.Show();
-        }
-
-        private void calculate_Salary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            calculateSalary calculateSalary = new calculateSalary();
-            this.Hide();
-            calculateSalary.Show();
-        }
-
-        private void logOut_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            login login = new login();
-            this.Hide();
-            login.Show();
-        }
-
+        
         private void calculateSalary_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (close)
-            {
-                DialogResult result = MessageBox.Show("Are You Sure You Want To Exit", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    close = false;
-                    Application.Exit();
-                }
-                else
-                {
-                    close = true;
-                }
-            }          
+           
         }
 
         private void FillData()
@@ -120,34 +73,11 @@ namespace EmployeePayrollManagementSystem
                 empCalculatedg.Columns[9].Width = 100;
                 empCalculatedg.Columns[10].Width = 100;
 
-
-          
-          /*  SqlDataAdapter daEmp = new SqlDataAdapter("SELECT * FROM tblEmployee", consql);
-            DataSet dsEmp = new DataSet();
-
-            try
-            {
-                consql.Open();
-                daEmp.Fill(dsEmp, "Employee");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-            finally
-            {
-                consql.Close();
-            }
-
-            // Bind the employee ID ComboBox
-            DataTable dt = dsEmp.Tables["Employee"];
-            empid.DataSource = dt;
-            empid.DisplayMember = "EmpID";
-           */
         }
 
         private void calculateSalary_Load(object sender, EventArgs e)
         {
+            CheckLastDayOfMonth();
             connection();
             FillData();
             LoadEmployeeData();
@@ -173,8 +103,6 @@ namespace EmployeePayrollManagementSystem
             leaveday.Text = "";
             mealallowance.Text = "30000";
             tranallowance.Text = "30000";
-           // tranallowance.Text = "";
-           // mealallowance.Text = "";
             attendance.Focus();
            
         }
@@ -185,343 +113,375 @@ namespace EmployeePayrollManagementSystem
         }
         private void btncalculate_Click(object sender, EventArgs e)
         {
-            if (empid.Text != "")
+            int lateDay;
+            if(string.IsNullOrEmpty(lateday.Text))
             {
-                string empJoinDateText = empjoindate.Text;
-                DateTime empJoinDate = DateTime.Parse(empJoinDateText);
-                TimeSpan difference = DateTime.Today - empJoinDate;
-             //   int months = (DateTime.Today.Year - empJoinDate.Year) * 12 + DateTime.Today.Month - empJoinDate.Month;
-                int months = difference.Days / 30; 
-             //   MessageBox.Show("months " + months);
-                int daysDifference = difference.Days;
-                if (daysDifference <= 30 && months == 0)
-                {
-                    MessageBox.Show("Join Date is " + daysDifference + "\n Please Enter " + daysDifference + " In Attendance!");
-                    MessageBox.Show("This months salary must be get");
-                }
-
-                DateTime currentDateOnly = DateTime.Today;
-                int monthsDifference = ((currentDateOnly.Year - empJoinDate.Year) * 12) + currentDateOnly.Month - empJoinDate.Month;
-
-
-                int leave = 0;
-                int late = 0;
-
-                decimal mealAllowance = 0;
-                decimal tranAllowance = 0;
-                decimal salebonus = 0;
-                //   decimal paymentamount = 0;
-                decimal totalpayment = 0;
-                string value = "";
-
-                bool isCheckedNormal = normal.Checked;
-                bool isCheckedGood = good.Checked;
-
-                if (monthsDifference >= 6)
-                {
-                    //start  for bonus 
-                    if (isCheckedNormal)
-                    {
-                        value = normal.Text;
-                    }
-                    else if (isCheckedGood)
-                    {
-                        value = good.Text;
-                    }
-                    else
-                    {
-                        value = excellence.Text;
-                    }
-                    // end  for bonus 
-
-                    if (Validation())
-                    {
-                        if (leaveday.Text != "")
-                        {
-                            leave = Convert.ToInt16(leaveday.Text);
-                        }
-                        if (lateday.Text != "")
-                        {
-                            late = Convert.ToInt16(lateday.Text);
-                        }
-                        if (mealallowance.Text != "")
-                        {
-                            mealAllowance = Convert.ToDecimal(mealallowance.Text);
-                        }
-                        if (tranallowance.Text != "")
-                        {
-                            tranAllowance = Convert.ToDecimal(tranallowance.Text);
-                        }
-
-
-                        decimal salaryValue = Convert.ToDecimal(empsalary.Text);
-                        int att = Convert.ToInt16(attendance.Text);
-                        decimal onedaysalary = salaryValue / 30;
-
-                        if (salaryValue < 500000)
-                        {
-
-                            //  start for sale person
-                            /*    if (sale == 0)
-                                {
-                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) + mealAllowance + tranAllowance;
-                                }
-                             * */
-                            mealAllowance = 30000;
-                            tranAllowance = 30000;
-
-                            if (late <= 2)
-                            {
-
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary) + mealAllowance + tranAllowance;
-                                if (value == "Normal")
-                                {
-                                    totalpayment += 30000;
-                                }
-                                else if (value == "Good")
-                                {
-                                    totalpayment += 50000;
-                                }
-                                else
-                                {
-                                    totalpayment += 70000;
-                                }
-
-                            }
-
-                            if (late == 3)
-                            {
-                                decimal totalsalary = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
-                                totalpayment = totalsalary + mealAllowance + tranAllowance;
-                                if (value == "Normal")
-                                {
-                                    totalpayment += 30000;
-                                }
-                                else if (value == "Good")
-                                {
-                                    totalpayment += 50000;
-                                }
-                                else
-                                {
-                                    totalpayment += 70000;
-                                }
-                            }
-                            else if (late >= 3)
-                            {
-                                decimal totalsalary = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
-                                totalpayment = totalsalary + mealAllowance + tranAllowance;
-                                if (value == "Normal")
-                                {
-                                    totalpayment += 30000; ;
-                                }
-                                else if (value == "Good")
-                                {
-                                    totalpayment += 50000;
-                                }
-                                else
-                                {
-                                    totalpayment += 70000;
-                                }
-                            }
-                        }
-
-                        else if (salaryValue > 500000)
-                        {
-                            mealAllowance = 0;
-                            tranAllowance = 0;
-
-                            if (late <= 2)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary);
-                                //   MessageBox.Show("hi");
-                                if (value == "Normal")
-                                {
-                                    totalpayment += 30000;
-                                }
-                                else if (value == "Good")
-                                {
-                                    totalpayment += 50000;
-                                }
-                                else
-                                {
-                                    totalpayment += 70000;
-                                }
-                            }
-                            if (late == 3)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
-                                if (value == "Normal")
-                                {
-                                    totalpayment += 30000;
-                                }
-                                else if (value == "Good")
-                                {
-                                    totalpayment += 50000;
-                                }
-                                else
-                                {
-                                    totalpayment += 70000;
-                                }
-                            }
-                            else if (late >= 3)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
-                                if (value == "Normal")
-                                {
-                                    totalpayment += 30000;
-                                }
-                                else if (value == "Good")
-                                {
-                                    totalpayment += 50000;
-                                }
-                                else
-                                {
-                                    totalpayment += 70000;
-                                }
-                            }
-                        }
-                        empsalary.Text = salaryValue.ToString();
-                    }
-
-                    //sale bonus start
-                    int sale = 0;
-                    if (noofsale.Text != "")
-                    {
-                        sale = Convert.ToInt16(noofsale.Text);
-                      //  MessageBox.Show(sale.ToString());
-                        if (sale >= 1 && sale <= 10)
-                        {
-                            salebonus = 20000;
-                            totalpayment += salebonus;
-                        }
-                        else if (sale >= 11 && sale <= 20)
-                        {
-                            salebonus = 40000;
-                            totalpayment += salebonus;
-                        }
-                        else
-                        {
-                            salebonus = 60000;
-                            totalpayment += salebonus;
-                        }
-                    }
-                    //sale bonus end
-                }
-                else
-                {
-                    if (Validation())
-                    {
-
-                        decimal salaryValue = Convert.ToDecimal(empsalary.Text);
-                        int att = Convert.ToInt16(attendance.Text);
-                        if (leaveday.Text != "")
-                        {
-                            leave = Convert.ToInt16(leaveday.Text);
-                        }
-                        if (lateday.Text != "")
-                        {
-                            late = Convert.ToInt16(lateday.Text);
-                        }
-
-
-                        decimal onedaysalary = salaryValue / 30;
-
-                        if (salaryValue < 500000)
-                        {
-                            if (late <= 2)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary);
-                            }
-
-                            if (late == 3)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
-
-                            }
-                            else if (late >= 3 && late <= 6)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
-                            }
-                        }
-
-                        else if (salaryValue > 500000)
-                        {
-                            if (late <= 2)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary);
-                            }
-                            if (late == 3)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
-                            }
-                            else if (late >= 3 && late <= 6)
-                            {
-                                totalpayment = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
-                            }
-                        }
-
-                        empsalary.Text = salaryValue.ToString();
-                    }
-
-                }
-
-                string paymentamount = totalpayment.ToString("0.");
-                MessageBox.Show("Payment Amount: " + paymentamount + "\n sale bonus " + salebonus + "\n Attendance " + attendance.Text + "\n Late day " + lateday.Text + "\n Leave day " + leaveday.Text);
-
-
-                SavePaymentInformation(paymentamount, empid.Text);
-                SaveAttendanceInformation(attendance.Text, lateday.Text, leaveday.Text, empid.Text);
-                SaveAllowanceInformation(mealAllowance, tranAllowance, empid.Text);
-
-               // int nosale = 0;
-                string remark = "";
-                if (normal.Checked == true)
-                {
-                    remark = "normal";
-                }
-                if (good.Checked == true)
-                {
-                    remark = "good";
-                }
-                if (excellence.Checked == true)
-                {
-                    remark = "Excellence";
-                }
-                saveEmployeeRemark(remark, empid.Text);
-                //saveNoOfSale(nosale, empid.Text);
-                FillData();
+                lateDay = 0;
             }
             else
             {
-                MessageBox.Show("Choose ID");
+                lateDay = Convert.ToInt16(lateday.Text);
             }
-        }
-            
+           
+            if (lateDay > 6)
+            {
+                MessageBox.Show("Late day can't be more than 6");
+                errorProvider1.SetError(lateday, "Omg, you can't late more than 6 days.");
+                lateday.Focus();
+                return;
+                
+            }
+            else
+            {
+                if (empid.Text != "")
+                {
+                    int att;
+                    string empJoinDateText = empjoindate.Text;
+                    DateTime empJoinDate = DateTime.Parse(empJoinDateText);
+                    TimeSpan difference = DateTime.Today - empJoinDate;
+                    int months = DateTime.Today.Month;
+                   
+                    int daysDifference = difference.Days;
+                    if (daysDifference <= 30)
+                    {
+                        att = daysDifference;
+                        attendance.Enabled = false;
+                    }
+                    else
+                    {
+                        att = 30;
+                        attendance.Enabled = false;
+                    }
 
+                    DateTime currentDateOnly = DateTime.Today;
+                    int monthsDifference = ((currentDateOnly.Year - empJoinDate.Year) * 12) + currentDateOnly.Month - empJoinDate.Month;
+
+
+                    int leave = 0;
+                    int late = 0;
+
+                    decimal mealAllowance = 0;
+                    decimal tranAllowance = 0;
+                    decimal totalpayment = 0;
+                    string value = "";
+
+                    bool isCheckedNormal = normal.Checked;
+                    bool isCheckedGood = good.Checked;
+
+                    if (monthsDifference >= 6)
+                    {
+                        //start  for bonus 
+                        if (isCheckedNormal)
+                        {
+                            value = normal.Text;
+                        }
+                        else if (isCheckedGood)
+                        {
+                            value = good.Text;
+                        }
+                        else
+                        {
+                            value = excellence.Text;
+                        } 
+
+                        if (Validation())
+                        {
+                            if (lateday.Text != "")
+                            {
+                                late = Convert.ToInt16(lateday.Text);
+                            }
+                            if (mealallowance.Text != "")
+                            {
+                                mealAllowance = Convert.ToDecimal(mealallowance.Text);
+                            }
+                            if (tranallowance.Text != "")
+                            {
+                                tranAllowance = Convert.ToDecimal(tranallowance.Text);
+                            }
+                            if (late > 6)
+                            {
+                                MessageBox.Show("Late day can't be more than 6");
+                                lateday.Focus();
+                            }
+
+
+                            decimal salaryValue = Convert.ToDecimal(empsalary.Text);
+                            decimal onedaysalary = salaryValue / 30;
+
+                            if (salaryValue < 500000)
+                            {
+                                mealAllowance = 30000;
+                                tranAllowance = 30000;
+
+                                if (late <= 2)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) + mealAllowance + tranAllowance;
+                                    if (value == "Normal")
+                                    {
+                                        totalpayment += 30000;
+                                    }
+                                    else if (value == "Good")
+                                    {
+                                        totalpayment += 50000;
+                                    }
+                                    else
+                                    {
+                                        totalpayment += 70000;
+                                    }
+
+                                }
+
+                                if (late == 3)
+                                {
+                                    decimal totalsalary = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
+                                    totalpayment = totalsalary + mealAllowance + tranAllowance;
+                                    if (value == "Normal")
+                                    {
+                                        totalpayment += 30000;
+                                    }
+                                    else if (value == "Good")
+                                    {
+                                        totalpayment += 50000;
+                                    }
+                                    else
+                                    {
+                                        totalpayment += 70000;
+                                    }
+                                }
+                                else if (late >= 3)
+                                {
+                                    decimal totalsalary = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
+                                    totalpayment = totalsalary + mealAllowance + tranAllowance;
+                                    if (value == "Normal")
+                                    {
+                                        totalpayment += 30000; ;
+                                    }
+                                    else if (value == "Good")
+                                    {
+                                        totalpayment += 50000;
+                                    }
+                                    else
+                                    {
+                                        totalpayment += 70000;
+                                    }
+                                }
+                            }
+
+                            else if (salaryValue > 500000)
+                            {
+                                mealAllowance = 0;
+                                tranAllowance = 0;
+
+                                if (late <= 2)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary);
+                                    if (value == "Normal")
+                                    {
+                                        totalpayment += 30000;
+                                    }
+                                    else if (value == "Good")
+                                    {
+                                        totalpayment += 50000;
+                                    }
+                                    else
+                                    {
+                                        totalpayment += 70000;
+                                    }
+                                }
+                                if (late == 3)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
+                                    if (value == "Normal")
+                                    {
+                                        totalpayment += 30000;
+                                    }
+                                    else if (value == "Good")
+                                    {
+                                        totalpayment += 50000;
+                                    }
+                                    else
+                                    {
+                                        totalpayment += 70000;
+                                    }
+                                }
+                                else if (late >= 3)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
+                                    if (value == "Normal")
+                                    {
+                                        totalpayment += 30000;
+                                    }
+                                    else if (value == "Good")
+                                    {
+                                        totalpayment += 50000;
+                                    }
+                                    else
+                                    {
+                                        totalpayment += 70000;
+                                    }
+                                }
+                            }
+                            empsalary.Text = salaryValue.ToString();
+                        }
+                    }
+                    else
+                    {
+                        if (Validation())
+                        {
+
+                            decimal salaryValue = Convert.ToDecimal(empsalary.Text);
+                            if (leaveday.Text != "")
+                            {
+                                leave = Convert.ToInt16(leaveday.Text);
+                            }
+                            if (lateday.Text != "")
+                            {
+                                late = Convert.ToInt16(lateday.Text);
+                            }
+                           
+
+                            decimal onedaysalary = salaryValue / 30;
+
+                            if (salaryValue < 500000)
+                            {
+                                if (late <= 2)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary);
+                                }
+
+                                if (late == 3)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
+
+                                }
+                                else if (late >= 3 && late <= 6)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
+                                }
+                            }
+
+                            else if (salaryValue > 500000)
+                            {
+                                if (late <= 2)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary);
+                                }
+                                if (late == 3)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) - onedaysalary;
+                                }
+                                else if (late >= 3 && late <= 6)
+                                {
+                                    totalpayment = (onedaysalary * att) - (leave * onedaysalary) - (2 * onedaysalary);
+                                }
+                            }
+
+                            empsalary.Text = salaryValue.ToString();
+                        }
+
+                    }
+
+                    string paymentamount = totalpayment.ToString("0.");
+                    MessageBox.Show(" \n Payment Amount: " + paymentamount + "\n Attendance " + att + "\n Late day " + lateday.Text + "\n Leave day " + leaveday.Text);
+
+                    DateTime currentDate = DateTime.Now;
+                   
+                    string searchQuery = "SELECT EmpID, PaymentDate FROM tblPayment WHERE EmpID =@empid AND MONTH(dbo.tblPayment.PaymentDate) = MONTH('" + currentDate + "')";
+                    SqlCommand cmd = new SqlCommand(searchQuery, consql);
+                    cmd.Parameters.AddWithValue("@empid", empid.Text);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read() == true)
+                    {
+                        MessageBox.Show("Salary already Calculate and added for theis month", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        reader.Close();
+                    }
+                    else
+                    {
+                        reader.Close();
+                        SavePaymentInformation(paymentamount, empid.Text);
+                        SaveAttendanceInformation(attendance.Text, lateday.Text, leaveday.Text, empid.Text);
+                        SaveAllowanceInformation(mealAllowance, tranAllowance, empid.Text);
+                       
+                        string remark = "";
+                        if (normal.Checked == true)
+                        {
+                            remark = "normal";
+                        }
+                        if (good.Checked == true)
+                        {
+                            remark = "good";
+                        }
+                        if (excellence.Checked == true)
+                        {
+                            remark = "Excellence";
+                        }
+                        saveEmployeeRemark(remark, empid.Text);
+                        FillData();
+                        IsPaymentAlreadyDoneThisMonth();
+                    }
+
+                    
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Choose ID");
+                }
+            }
+            
+        }
+        private bool IsPaymentAlreadyDoneThisMonth()
+        {
+            string connectionString = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=epms;Integrated Security=True";
+            string query = "SELECT COUNT(*) FROM tblPayment WHERE EmpID = @EmpID AND YEAR(PaymentDate) = YEAR(GETDATE()) AND MONTH(PaymentDate) = MONTH(GETDATE())";
+            int paymentCount = 0;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@EmpID", empid.Text);
+                        paymentCount = Convert.ToInt32(command.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return false;
+            }
+            if (paymentCount > 1)
+            {
+                MessageBox.Show("This Employee's payment is done!");
+                Clear();
+            }
+           
+            return paymentCount > 0;
+        }
         private void saveEmployeeRemark(string remark, string empID)
         { 
          try{
-                string noOfSale = noofsale.Text;
-                string strInsert = "Update tblEmployee Set Remark = @remark,NoOfSale = @sale Where EmpID = @empID";
+                string strInsert = "Update tblEmployee Set Remark = @remark Where EmpID = @empID";
                 SqlCommand mycmd = new SqlCommand(strInsert, consql);
                 mycmd.Parameters.AddWithValue("@remark", remark);
-                mycmd.Parameters.AddWithValue("@empID", empID);
-                mycmd.Parameters.AddWithValue("@sale", noOfSale);               
+                mycmd.Parameters.AddWithValue("@empID", empID);              
                 mycmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-        // MessageBox.Show(remark);
         }
         private void saveNoOfSale(int nosale, string empID)
         {
            
             try
             {
-                  //  int nosale = 0;
-                    using (SqlConnection consql = new SqlConnection("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword"))
+                using (SqlConnection consql = new SqlConnection("Data Source=ADMINISTRATOR;Initial Catalog=epms;Persist Security Info=True;User ID=sa;Password=p@ssw0rd"))
                     {
                         consql.Open();
 
@@ -538,7 +498,6 @@ namespace EmployeePayrollManagementSystem
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-          //  MessageBox.Show(nosale.ToString());
         }
 
         private void SaveAllowanceInformation(decimal mealallowance, decimal tranallowance, string empID)
@@ -563,11 +522,9 @@ namespace EmployeePayrollManagementSystem
 
                 string strInsert = "INSERT INTO tblAllowance (AllowanceID, EmpID, TransporationAllowance, MealAllowance) VALUES (@AllowanceID, @EmpID, @TransporationAllowance, @MealAllowance)";
                 SqlCommand mycmd = new SqlCommand(strInsert, consql);
-
-                // Ensure that you are using the values, not the controls directly
                 mycmd.Parameters.AddWithValue("@AllowanceID", allowanceID);
                 mycmd.Parameters.AddWithValue("@EmpID", empID);
-                mycmd.Parameters.AddWithValue("@TransporationAllowance", tranallowance);  // Use .Text to get the value
+                mycmd.Parameters.AddWithValue("@TransporationAllowance", tranallowance); 
                 mycmd.Parameters.AddWithValue("@MealAllowance", mealallowance);
                 mycmd.ExecuteNonQuery();
             }
@@ -592,13 +549,14 @@ namespace EmployeePayrollManagementSystem
                     paymentID = 1;
                 }
 
+                
+
                 string strInsert = "INSERT INTO tblPayment (PaymentID, EmpID, PaymentDate, PaymentAmount) VALUES (@PaymentID, @EmpID, @PaymentDate, @PaymentAmount)";
                 SqlCommand mycmd = new SqlCommand(strInsert, consql);
 
-                // Ensure that you are using the values, not the controls directly
                 mycmd.Parameters.AddWithValue("@PaymentID", paymentID);
                 mycmd.Parameters.AddWithValue("@EmpID", empID);
-                mycmd.Parameters.AddWithValue("@PaymentDate", paymentdate.Text);  // Use .Text to get the value
+                mycmd.Parameters.AddWithValue("@PaymentDate", paymentdate.Text);  
                 mycmd.Parameters.AddWithValue("@PaymentAmount", paymentamount);
                 mycmd.ExecuteNonQuery();
             }
@@ -624,8 +582,6 @@ namespace EmployeePayrollManagementSystem
                 }
                 string strInsert = "INSERT INTO tblAttendance (AttendanceID, EmpID, TotalAttendance, TotalLateDay, TotalLeaveDay) VALUES (@AttendanceID, @EmpID, @TotalAttendance, @TotalLateDay, @TotalLeaveDay)";
                 SqlCommand mycmd = new SqlCommand(strInsert, consql);
-
-                // Ensure that you are using the values, not the controls directly
                 mycmd.Parameters.AddWithValue("@AttendanceID", attendanceID);
                 mycmd.Parameters.AddWithValue("@EmpID", empID);
                 mycmd.Parameters.AddWithValue("@TotalAttendance", attendance.Text);  // Use .Text to get the value
@@ -644,7 +600,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = true;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = false;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = false;
@@ -658,7 +614,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = true;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = false;
@@ -672,7 +628,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = false;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = true;
@@ -686,7 +642,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = false;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = false;
@@ -700,7 +656,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = false;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = false;
@@ -728,9 +684,6 @@ namespace EmployeePayrollManagementSystem
             if (string.IsNullOrEmpty(empid.Text))
             {
                 errorProvider1.SetError(empid, "Please Choose Employee ID");
-            }else if (string.IsNullOrEmpty(attendance.Text))
-            {
-                errorProvider1.SetError(attendance, "Attendance Required");
             }
             else
             {
@@ -746,7 +699,7 @@ namespace EmployeePayrollManagementSystem
 
                 string str = "SELECT e.Name, e.BankAccount,e.JoinDate, p.BasicSalary " +
                          "FROM tblEmployee e " +
-                         "INNER JOIN tblPosition p ON e.PositionID = p.PositionID " +
+                         "INNER JOIN tblSalary p ON e.PositionID = p.Position_ID " +
                          "WHERE e.EmpID = @EmpID";
 
                 using (SqlDataAdapter adEmp = new SqlDataAdapter(str, consql))
@@ -786,20 +739,6 @@ namespace EmployeePayrollManagementSystem
 
               daEmpData.Fill(dtEmpData);
               empCalculatedg.DataSource = dtEmpData;
-
-
-           /*  string query = "SELECT Name,Address,PhoneNumber,Remark,JoinDate,NoOfSale,BankAccount,Department,Position,BasicSalary FROM tblEmployee INNER JOIN tblPosition ON tblEmployee.PositionID = tblPosition.PositionID LEFT JOIN tblAttendance ON tblEmployee.EmpID = tblAttendance.EmpID";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, consql);
-
-            daEmpData.Fill(dtEmpData);
-            empCalculatedg.DataSource = dtEmpData;
-
-           DataSet Dset = new DataSet();
-            adapter.Fill(Dset, "salaryReport");
-            dtsalary = Dset.Tables["salaryReport"];
-            dgSalary.DataSource = dtsalary;
-
-            */
         }
 
         public string value { get; set; }
@@ -827,23 +766,11 @@ namespace EmployeePayrollManagementSystem
             empname.Text = Dset.Tables[0].Rows[i][1].ToString();
             empsalary.Text = Dset.Tables[0].Rows[i][2].ToString();
             empbankacc.Text = Dset.Tables[0].Rows[i][3].ToString();
-            empjoindate.Text = Dset.Tables[0].Rows[i][3].ToString();
+            empjoindate.Text = Dset.Tables[0].Rows[i][4].ToString();
 
         }
 
-        private void attendance_TextChanged(object sender, EventArgs e)
-        {
-            bool isNumeric = !string.IsNullOrEmpty(attendance.Text) && attendance.Text.All(char.IsDigit);
-            if (!isNumeric)
-            {
-                errorProvider1.SetError(attendance, "Please enter a valid");
-            }
-            else
-            {
-                errorProvider1.Clear();
-            }
-        }
-
+       
         private void lateday_TextChanged(object sender, EventArgs e)
         {
             bool isNumeric = !string.IsNullOrEmpty(lateday.Text) && lateday.Text.All(char.IsDigit);
@@ -870,16 +797,19 @@ namespace EmployeePayrollManagementSystem
             }
         }
 
-        private void noofsale_TextChanged(object sender, EventArgs e)
+        private void CheckLastDayOfMonth()
         {
-            bool isNumeric = !string.IsNullOrEmpty(noofsale.Text) && noofsale.Text.All(char.IsDigit);
-            if (!isNumeric)
+            DateTime currentDate = new DateTime(2024, 2, 29); 
+            
+            if (currentDate.Day == DateTime.DaysInMonth(currentDate.Year, currentDate.Month))
             {
-                errorProvider1.SetError(noofsale, "Please enter a valid");
+                MessageBox.Show("This form will load only on the last day of the month.");
+                
             }
             else
             {
-                errorProvider1.Clear();
+                MessageBox.Show("This form will not load today. Har Ha");
+                this.Close();
             }
         }
     }

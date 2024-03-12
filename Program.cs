@@ -16,7 +16,7 @@ namespace EmployeePayrollManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new salaryReport());
+            Application.Run(new login());
         }
     }
 }

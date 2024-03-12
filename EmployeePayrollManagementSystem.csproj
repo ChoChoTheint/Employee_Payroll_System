@@ -60,17 +60,77 @@
     <Compile Include="addEmployee.Designer.cs">
       <DependentUpon>addEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="addPosition.cs">
+    <Compile Include="addSalary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addPosition.Designer.cs">
-      <DependentUpon>addPosition.cs</DependentUpon>
+    <Compile Include="addSalary.Designer.cs">
+      <DependentUpon>addSalary.cs</DependentUpon>
     </Compile>
     <Compile Include="calculateSalary.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="calculateSalary.Designer.cs">
       <DependentUpon>calculateSalary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="addDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addDepartment.Designer.cs">
+      <DependentUpon>addDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="customReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customReport.Designer.cs">
+      <DependentUpon>customReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="filterDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="filterDepartment.Designer.cs">
+      <DependentUpon>filterDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="filterMonthly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="filterMonthly.Designer.cs">
+      <DependentUpon>filterMonthly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="filterOffice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="filterOffice.Designer.cs">
+      <DependentUpon>filterOffice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="filterProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="filterProfile.Designer.cs">
+      <DependentUpon>filterProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="filterSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="filterSalary.Designer.cs">
+      <DependentUpon>filterSalary.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -91,23 +151,107 @@
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
+    <Compile Include="addPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addPosition.Designer.cs">
+      <DependentUpon>addPosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="miniDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="miniDashboard.Designer.cs">
+      <DependentUpon>miniDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rptDept.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptDept.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptProfile.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptProfile.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptReporting.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptReporting.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptSalary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptSalary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="salaryReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="salaryReport.Designer.cs">
       <DependentUpon>salaryReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="saleData.cs">
+      <DependentUpon>saleData.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="saleData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>saleData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="salReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="salReport.Designer.cs">
+      <DependentUpon>salReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelectionChangedEventArgs.cs" />
     <EmbeddedResource Include="addEmployee.resx">
       <DependentUpon>addEmployee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addPosition.resx">
-      <DependentUpon>addPosition.cs</DependentUpon>
+    <EmbeddedResource Include="addSalary.resx">
+      <DependentUpon>addSalary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="calculateSalary.resx">
       <DependentUpon>calculateSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport3.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport3.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addDepartment.resx">
+      <DependentUpon>addDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customReport.resx">
+      <DependentUpon>customReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="filterDepartment.resx">
+      <DependentUpon>filterDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="filterMonthly.resx">
+      <DependentUpon>filterMonthly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="filterOffice.resx">
+      <DependentUpon>filterOffice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="filterProfile.resx">
+      <DependentUpon>filterProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="filterSalary.resx">
+      <DependentUpon>filterSalary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -117,6 +261,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addPosition.resx">
+      <DependentUpon>addPosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="miniDashboard.resx">
+      <DependentUpon>miniDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -128,8 +278,27 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="rptDept.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptDept.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptProfile.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptProfile.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptReporting.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptReporting.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptSalary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSalary.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="salaryReport.resx">
       <DependentUpon>salaryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="salReport.resx">
+      <DependentUpon>salReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -140,6 +309,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="saleData.xsc">
+      <DependentUpon>saleData.xsd</DependentUpon>
+    </None>
+    <None Include="saleData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>saleData.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="saleData.xss">
+      <DependentUpon>saleData.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -170,6 +350,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calculator %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\monitor %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

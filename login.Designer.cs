@@ -57,7 +57,8 @@
             // 
             this.PictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBox1.BackgroundImage")));
             this.PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox1.Image")));
-            this.PictureBox1.Location = new System.Drawing.Point(0, 67);
+            this.PictureBox1.Location = new System.Drawing.Point(0, 66);
+            this.PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(908, 581);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -74,12 +75,15 @@
             this.GroupBox1.Controls.Add(this.btnClear);
             this.GroupBox1.Controls.Add(this.btnLogin);
             this.GroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBox1.Location = new System.Drawing.Point(902, 67);
+            this.GroupBox1.Location = new System.Drawing.Point(901, 66);
+            this.GroupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GroupBox1.Name = "GroupBox1";
+            this.GroupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GroupBox1.Size = new System.Drawing.Size(572, 581);
             this.GroupBox1.TabIndex = 4;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Login";
+       //     this.GroupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter);
             // 
             // Label2
             // 
@@ -105,6 +109,7 @@
             // 
             this.userPw.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userPw.Location = new System.Drawing.Point(249, 276);
+            this.userPw.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.userPw.Name = "userPw";
             this.userPw.PasswordChar = '*';
             this.userPw.Size = new System.Drawing.Size(229, 34);
@@ -114,6 +119,7 @@
             // 
             this.userName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userName.Location = new System.Drawing.Point(249, 180);
+            this.userName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.userName.Name = "userName";
             this.userName.Size = new System.Drawing.Size(229, 34);
             this.userName.TabIndex = 6;
@@ -125,6 +131,7 @@
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnClear.Location = new System.Drawing.Point(311, 367);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(97, 50);
             this.btnClear.TabIndex = 4;
@@ -138,6 +145,7 @@
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLogin.Location = new System.Drawing.Point(171, 367);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(103, 50);
             this.btnLogin.TabIndex = 4;
@@ -153,8 +161,9 @@
             this.Panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Panel1.ForeColor = System.Drawing.Color.LightGreen;
             this.Panel1.Location = new System.Drawing.Point(0, 0);
+            this.Panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(1474, 71);
+            this.Panel1.Size = new System.Drawing.Size(1475, 71);
             this.Panel1.TabIndex = 3;
             // 
             // Label1
@@ -162,11 +171,11 @@
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label1.ForeColor = System.Drawing.Color.Ivory;
-            this.Label1.Location = new System.Drawing.Point(549, 19);
+            this.Label1.Location = new System.Drawing.Point(549, 18);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(511, 32);
+            this.Label1.Size = new System.Drawing.Size(338, 32);
             this.Label1.TabIndex = 0;
-            this.Label1.Text = "Employee Payroll Management System";
+            this.Label1.Text = "Employee Payroll System";
             this.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // errorProvider1
@@ -189,10 +198,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1474, 646);
+            this.ClientSize = new System.Drawing.Size(1475, 646);
             this.Controls.Add(this.PictureBox1);
             this.Controls.Add(this.GroupBox1);
             this.Controls.Add(this.Panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

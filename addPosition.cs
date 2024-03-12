@@ -8,362 +8,250 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+
 namespace EmployeePayrollManagementSystem
 {
     public partial class addPosition : Form
     {
-        SqlConnection consql;
-        string str;
-        DataSet Dset;
-        bool close = true;
-        private ErrorProvider errorProvider = new ErrorProvider();
         public addPosition()
         {
             InitializeComponent();
-            txtbasicsalary.TextChanged += txtbasicsalary_TextChanged;
-        }     
+        }
+
+        private void position_Load(object sender, EventArgs e)
+        {
+            connection();
+            FillData();
+            AutoID();
+            txtid.Enabled = false;
+            fillDept();
+        }
+        SqlConnection consql;
+        DataSet Dset;
+        string constr;
+        DataTable dtDepartment;
+        DataTable dtPosition;
+        void connection()
+        {
+            constr = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=epms;Integrated Security=True";
+            consql = new SqlConnection(constr);
+            consql.Open();
+        }
         void AutoID()
         {
-            int PID = 1; // Initialize CID with 1 as a fallback
+            int PID = 1;
 
-            SqlDataAdapter ad = new SqlDataAdapter("SELECT PositionId FROM tblPosition ORDER BY PositionId DESC", consql);
+            SqlDataAdapter ad = new SqlDataAdapter("SELECT Position_ID FROM tblPosition ORDER BY Position_ID DESC", consql);
             DataSet ds = new DataSet();
             ad.Fill(ds);
-
+            
             if (ds.Tables[0].Rows.Count > 0)
             {
-                string pID = ds.Tables[0].Rows[0]["PositionId"].ToString();
-
-                // Try to parse the numeric part of the last customer ID
+                string pID = ds.Tables[0].Rows[0]["Position_ID"].ToString();
                 if (int.TryParse(pID.Substring(2), out PID))
                 {
-                    PID++; // Increment the CID
+                    PID++; 
                 }
             }
 
             txtid.Text = "P_" + PID.ToString("0000000");
+             
         }
-      
+        private void fillDept()
+        {
+            SqlDataAdapter daDepartment = new SqlDataAdapter("Select * From tblDepartment", consql);
+            DataSet dsDepartment = new DataSet();
+
+            daDepartment.Fill(dsDepartment, "Department");
+            dtDepartment = dsDepartment.Tables["Department"];
+            cboDepartment.DataSource = dtDepartment;
+            cboDepartment.DisplayMember = dtDepartment.Columns["Department"].ToString();
+        }
+
         private void FillData()
         {
             
-            string query = "Select * From tblPosition";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, consql);
-            Dset = new DataSet();
-            adapter.Fill(Dset);
-            dataView.DataSource = Dset.Tables[0];
+                string query = "Select * from tblPosition";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, consql);
+                Dset = new DataSet();
+                adapter.Fill(Dset, "position");
+                dtPosition = Dset.Tables["position"];
+                dgPosition.DataSource = dtPosition;
 
-            dataView.Columns[0].HeaderText = "ID";
-            dataView.Columns[1].HeaderText = "Department";
-            dataView.Columns[2].HeaderText = "Position";
-            dataView.Columns[3].HeaderText = "Basic Salary";
-           
-            dataView.Columns[0].Width = 120;
-            dataView.Columns[1].Width = 150;
-            dataView.Columns[2].Width = 120;
-            dataView.Columns[3].Width = 200;
+                dgPosition.Columns[0].HeaderText = "ID";
+                dgPosition.Columns[1].HeaderText = "Position";
+                dgPosition.Columns[2].HeaderText = "Department";
+
+                dgPosition.Columns[0].Width = 130; 
+                dgPosition.Columns[1].Width = 180;
+                dgPosition.Columns[2].Width = 160; 
            
         }
 
+        private void dgPosition_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataRow dr;
+            int i;
+            i = dgPosition.CurrentRow.Index;
+            dr = dtPosition.Rows[i]; 
+            txtid.Text = dr[0].ToString();
+            txtposition.Text = dr[1].ToString();
+            cboDepartment.Text = dr[2].ToString();
+           
+            btnSave.Enabled = false;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            FillData();
+        }
+        private bool Validation()
+        {
+            if (txtid.Text == "")
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtid, "ID is required!");
+                return false;
+            }
+            if (txtposition.Text == "")
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtposition, "Please Enter Position Name!");
+                return false;
+            }
+            if (txtposition.Text.All(char.IsDigit))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtposition, "Please Enter Position Name!");
+                return false;
+            }
+            string str = "select * from tblPosition where Position='" + txtposition.Text.Trim() + "'";
+            SqlDataAdapter ad = new SqlDataAdapter(str, consql);
+            DataTable dt = new DataTable();
+            ad.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtposition, "Position already exit!");
+                return false;
+            }
+            return true;
+        }
+
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearText();
+            txtposition.Focus();
+            errorProvider1.Clear();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            AutoID();
+            this.ActiveControl = txtposition;
+            errorProvider1.Clear();
+            btnSave.Enabled = true;
+            btnDelete.Enabled = false;
+            btnUpdate.Enabled = false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Validation())
+            {
+                string depID = "";
+                String conStr = "Select DeptID from tblDepartment Where Department ='" + cboDepartment.Text + "'";
+                SqlCommand cmd = new SqlCommand(conStr, consql);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    depID = reader[0].ToString();
+                }
+
+                consql.Close();
+                consql.Open();
+                string strInsert = "Insert Into tblPosition Values ('" + txtid.Text + "','" + txtposition.Text + "','" + depID + "')";
+                SqlCommand mycmd = new SqlCommand(strInsert, consql);
+                mycmd.ExecuteNonQuery();
+                MessageBox.Show("Finish save information", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                FillData();
+                ClearText();
+                errorProvider1.Clear();
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            DialogResult dresult = MessageBox.Show("Are you really want to Update data?", "Comfirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dresult == DialogResult.OK)
+            {
+                if (String.IsNullOrEmpty(txtposition.Text))
+                {
+                    MessageBox.Show("Position can't be empty", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                }
+                else
+                {
+                    try
+                    {
+                        string str = "Update tblPosition Set Position=@position,Department=@department WHERE Position_ID =@id";
+                        SqlCommand SqlComm = new SqlCommand(str, consql);
+                        SqlComm.Parameters.AddWithValue("@id", txtid.Text);
+                        SqlComm.Parameters.AddWithValue("@position", txtposition.Text);
+                        SqlComm.Parameters.AddWithValue("@department", cboDepartment.Text);
+                        SqlComm.ExecuteNonQuery();
+
+                        MessageBox.Show("Finish Update information", "Updated Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillData();
+                        ClearText();
+                        errorProvider1.Clear();
+                    }
+                  catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+             }
+        }
 
         void ClearText()
         {
             txtid.Text = "";
-            txtdept.Text = "";
             txtposition.Text = "";
-            txtbasicsalary.Text = "";
-            errorProvider1.Clear();
-           
         }
-       
-        private void addPosition_Load(object sender, EventArgs e)
-        {
-            str = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword";
-            consql = new SqlConnection(str);
-            consql.Open();
-            FillData();
-            AutoID();
-            txtid.Enabled = false;
-            this.ActiveControl = txtdept;
-        }
-        private void btnsave_Click(object sender, EventArgs e)
-        {
-            
-            if(Validation() == true){
 
-                try
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dresult = MessageBox.Show("Are you really want to Delete data?", "Comfirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dresult == DialogResult.OK)
+            {
+
+                if (String.IsNullOrEmpty(txtid.Text))
                 {
-                    string strInsert = "Insert Into tblPosition Values ('" + txtid.Text + "','" + txtdept.Text + "','" + txtposition.Text + "','" + txtbasicsalary.Text + "')";
-                    SqlCommand mycmd = new SqlCommand(strInsert, consql);
-                    mycmd.ExecuteNonQuery();
-                    MessageBox.Show("Finish save information", "Save Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FillData();
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                
-            }
-        }
+                    MessageBox.Show("Please select an ID.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-        private void btnupdate_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtid.Text))
-            {
-                errorProvider1.Clear();
-                MessageBox.Show("Choose ID", "Update Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }else if(Validation())
-            {
-                
-                string str = "Update tblPosition Set Department='" + txtdept.Text + "',Position='" + txtposition.Text + "',BasicSalary='" + txtbasicsalary.Text + "'  Where PositionID='" + txtid.Text + "'";
-                SqlCommand mycmd = new SqlCommand(str, consql);
-                mycmd.ExecuteNonQuery();
-                MessageBox.Show("Finish update information ", "Update Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FillData();
-            }
-        }
-
-        private void btndelete_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtid.Text))
-            {
-                errorProvider1.Clear();
-                MessageBox.Show("Choose ID", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                string str = "Delete from tblPosition Where PositionID='" + txtid.Text + "'";
-                SqlCommand mycmd = new SqlCommand(str, consql);
-                mycmd.ExecuteNonQuery();
-                MessageBox.Show("Finish delete information ", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FillData();
-                ClearText();
-            }
-        }
-        private void dataView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int i;
-            i = dataView.CurrentRow.Index;
-            txtid.Text = Dset.Tables[0].Rows[i][0].ToString();
-            txtdept.Text = Dset.Tables[0].Rows[i][1].ToString();
-            txtposition.Text = Dset.Tables[0].Rows[i][2].ToString();
-            txtbasicsalary.Text = Dset.Tables[0].Rows[i][3].ToString();
-
-            btnsave.Enabled = false;
-            btnnew.Enabled = false;
-        }
-
-        private void addPosition_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (close)
-            {
-                DialogResult result = MessageBox.Show("Are You Sure You Want To Exit", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    close = false;
-                    Application.Exit();
                 }
                 else
                 {
-                    close = true;
+                    try
+                    {
+
+                        string str = "Delete from tblPosition WHERE Position_ID =@id";
+                        SqlCommand SqlComm = new SqlCommand(str, consql);
+                        SqlComm.Parameters.AddWithValue("@id", txtid.Text);
+                        SqlComm.ExecuteNonQuery();
+
+                        MessageBox.Show("Successfully Deleted", "Process Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                    FillData();
+                    ClearText();
                 }
-            }        
-        }
-        private void txtid_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtdept.Focus();
+
             }
         }
-
-        private void txtdept_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtposition.Focus();
-            }
-        }
-        private void txtposition_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtbasicsalary.Focus();
-            }
-        }
-
-        private bool Validation()
-        {
-            bool result = false;
-            bool isNumeric = !string.IsNullOrEmpty(txtbasicsalary.Text) && txtbasicsalary.Text.All(char.IsDigit);
-            if (string.IsNullOrEmpty(txtid.Text))
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtid, "Please Click New Button!");
-            }
-            else if (string.IsNullOrEmpty(txtdept.Text))
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtdept, "Department Is Required");
-            }
-            
-            else if (string.IsNullOrEmpty(txtposition.Text))
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtposition, "Position Is Required");
-            }
-           else if (isNumeric== false)
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtbasicsalary, "Salary Is Required");
-            }
-            else
-            {
-                errorProvider1.Clear();
-                result = true;
-            }
-            return result;
-        }
-
-        private void btnclear_Click(object sender, EventArgs e)
-        {
-            txtid.Text = "";
-            txtdept.Text = "";
-            txtposition.Text = "";
-            txtbasicsalary.Text = "";
-            errorProvider1.Clear();
-        }
-
-        private void admindashboard_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Show();
-            addPosition addPosition = new addPosition();
-            addPosition.Close();
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Close();
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Close();
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Close();
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Close();
-            addPosition addPosition = new addPosition();
-            addPosition.Show();
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Close();
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Close();
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Close();
-        }
-
-        private void addemployee_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Close();
-            addPosition addPosition = new addPosition();
-            addPosition.Close();
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Show();
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Close();
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Close();
-        }
-
-        private void calculatesalary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Close();
-            addPosition addPosition = new addPosition();
-            addPosition.Close();
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Close();
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = true;
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Close();
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Close();
-            addPosition addPosition = new addPosition();
-            addPosition.Close();
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Close();
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Close();
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Show();
-        }
-
-        private void logout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Are You Sure You Want To Exit", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                login login = new login();
-                this.Close();
-                login.Show();
-            }
-        }
-        private void txtbasicsalary_TextChanged(object sender, EventArgs e)
-        {
-            bool isNumeric = !string.IsNullOrEmpty(txtbasicsalary.Text) && txtbasicsalary.Text.All(char.IsDigit);
-            if (!isNumeric)
-            {
-                errorProvider1.SetError(txtbasicsalary, "Please enter a valid numeric value.");
-            }
-            else
-            {
-                errorProvider1.Clear();
-            }
-        }
-        private void txtdept_TextChanged(object sender, EventArgs e)
-        {
-            bool isChar = !string.IsNullOrEmpty(txtdept.Text) && txtdept.Text.All(char.IsDigit);
-            if (isChar == true)
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtdept, "Department Field Must Be Char!");
-            }
-            else
-            {
-                errorProvider1.Clear();
-            }
-        }
-
-        private void txtposition_TextChanged(object sender, EventArgs e)
-        {
-            bool isChar = !string.IsNullOrEmpty(txtposition.Text) && txtposition.Text.All(char.IsDigit);
-            if (isChar == true)
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtposition, "Position Field Must Be Char!");
-            }
-            else
-            {
-                errorProvider1.Clear();
-            }
-        }
-
-       
-       
-
-       
-
-       
-
-     
-
-  
     }
 }

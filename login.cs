@@ -14,7 +14,7 @@ namespace EmployeePayrollManagementSystem
 {
     public partial class login : Form
     {
-        SqlConnection connect = new SqlConnection("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword");
+        SqlConnection connect = new SqlConnection("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=epms;Integrated Security=True");
         public login()
         {
             InitializeComponent();
@@ -44,9 +44,9 @@ namespace EmployeePayrollManagementSystem
                     {
                         if (userName.Text == "Admin" && userPw.Text == "admin10001")
                         {
-                            dashboardEmp dashboardEmp = new dashboardEmp();
+                            MainForm MainForm = new MainForm();
                             this.Hide();
-                            dashboardEmp.Show();
+                            MainForm.Show();
                         }
                         else
                         {
@@ -89,7 +89,6 @@ namespace EmployeePayrollManagementSystem
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
-           // userId.Text = "";
             userName.Text = "";
             userPw.Text = "";
         }
@@ -127,6 +126,5 @@ namespace EmployeePayrollManagementSystem
             }
         }
 
-     
     }
 }

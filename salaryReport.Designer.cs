@@ -47,6 +47,7 @@
             this.calculatesalary = new System.Windows.Forms.LinkLabel();
             this.logout = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnReport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgSalary)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -74,7 +75,7 @@
             this.txtreport.Location = new System.Drawing.Point(826, 45);
             this.txtreport.Multiline = true;
             this.txtreport.Name = "txtreport";
-            this.txtreport.Size = new System.Drawing.Size(176, 39);
+            this.txtreport.Size = new System.Drawing.Size(242, 39);
             this.txtreport.TabIndex = 7;
             // 
             // button1
@@ -271,11 +272,22 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // btnReport
+            // 
+            this.btnReport.Location = new System.Drawing.Point(1300, 41);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(126, 43);
+            this.btnReport.TabIndex = 10;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // salaryReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 763);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtreport);
@@ -321,6 +333,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Button btnReport;
 
     }
 }

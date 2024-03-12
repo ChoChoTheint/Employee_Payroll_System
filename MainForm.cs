@@ -19,9 +19,40 @@ namespace EmployeePayrollManagementSystem
 
         private void dashboard_Load(object sender, EventArgs e)
         {
-
+           openDashboard(new miniDashboard());
         }
-
+        
+        private Form activeForm = null;
+        private void openChildForm(Form childForm)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+            }
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panel_main.Controls.Add(childForm);
+            panel_main.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+        private void openDashboard(Form dashboard)
+        {
+            if (activeForm == null)
+            {
+                activeForm = dashboard;
+                dashboard.TopLevel = false;
+                dashboard.FormBorderStyle = FormBorderStyle.None;
+                dashboard.Dock = DockStyle.Fill;
+                panel_main.Controls.Add(dashboard);
+                panel_main.Tag = dashboard;
+                dashboard.BringToFront();
+                dashboard.Show();
+            }
+            
+        }
         
         private void logout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -37,74 +68,29 @@ namespace EmployeePayrollManagementSystem
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = true;
-            addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            openChildForm(new miniDashboard());
         }
 
         private void addposition_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
-            addPosition.Visible = true;
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            openChildForm(new addPosition());
 
         }
 
         private void addemployee_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = true;
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            openChildForm(new addEmployee());
         }
 
         private void calculatesalary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = true;
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = false;
+            openChildForm(new calculateSalary());
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            dashboardEmp dashboardEmp = new dashboardEmp();
-            dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
-            addPosition.Visible = false;
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.Visible = false;
-            calculateSalary calculateSalary = new calculateSalary();
-            calculateSalary.Visible = false;
-            salaryReport salaryReport = new salaryReport();
-            salaryReport.Visible = true;
+            openChildForm(new customReport());
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -113,6 +99,21 @@ namespace EmployeePayrollManagementSystem
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void addDept_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openChildForm(new addDepartment());
+        }
+
+        private void addSalary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openChildForm(new addSalary());
+        }
+
+        private void panel_main_Paint(object sender, PaintEventArgs e)
         {
 
         }

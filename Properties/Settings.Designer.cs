@@ -26,8 +26,8 @@ namespace EmployeePayrollManagementSystem.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Passwo" +
-            "rd=p@ssword")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMINISTRATOR;Initial Catalog=epms;Persist Security Info=True;User ID" +
+            "=sa;Password=p@ssw0rd")]
         public string EmpPayrollSystemConnectionString {
             get {
                 return ((string)(this["EmpPayrollSystemConnectionString"]));

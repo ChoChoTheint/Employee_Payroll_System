@@ -23,7 +23,7 @@ namespace EmployeePayrollManagementSystem
 
         void connection()
         {
-            str = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword";
+            str = "Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=epms;Integrated Security=True";
             consql = new SqlConnection(str);
             consql.Open();
         }
@@ -44,7 +44,7 @@ namespace EmployeePayrollManagementSystem
            * */
             try
             {
-                using (SqlConnection consql = new SqlConnection("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=EmpPayrollSystem;User ID=Sa;Password=p@ssword"))
+                using (SqlConnection consql = new SqlConnection("Data Source=DESKTOP-S262IJ9\\SA;Initial Catalog=epms;Integrated Security=True"))
                 {
                     consql.Open(); 
 
@@ -99,7 +99,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = true;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = false;
@@ -113,7 +113,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = false;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = true;
@@ -127,7 +127,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = false;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = false;
@@ -141,7 +141,7 @@ namespace EmployeePayrollManagementSystem
         {
             dashboardEmp dashboardEmp = new dashboardEmp();
             dashboardEmp.Visible = false;
-            addPosition addPosition = new addPosition();
+            addSalary addPosition = new addSalary();
             addPosition.Visible = false;
             addEmployee addEmployee = new addEmployee();
             addEmployee.Visible = false;
@@ -163,6 +163,16 @@ namespace EmployeePayrollManagementSystem
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void empcount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
